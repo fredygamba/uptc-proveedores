@@ -1,0 +1,13 @@
+co\com\uptc\proveedores\modelo\Origen.class
+co\com\uptc\proveedores\modelo\PlanCanal.class
+co\com\uptc\proveedores\modelo\Plan.class
+co\com\uptc\proveedores\modelo\TipoProducto.class
+co\com\uptc\proveedores\modelo\CuentaProveedor.class
+co\com\uptc\runners\Runner.class
+co\com\uptc\proveedores\modelo\Producto.class
+co\com\uptc\proveedores\modelo\Referenciado.class
+co\com\uptc\proveedores\modelo\Cuenta.class
+co\com\uptc\proveedores\modelo\Canal.class
+co\com\uptc\proveedores\modelo\Marca.class
+co\com\uptc\proveedores\modelo\Cliente.class
+co\com\uptc\proveedores\modelo\Proveedor.class
