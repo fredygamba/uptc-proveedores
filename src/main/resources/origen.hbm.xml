@@ -9,5 +9,16 @@
         <property name="descripcion" type="string">
             <column name="DESCRIPCION"/>
         </property>
+        <set name="productos" table="PRODUCTO" cascade="all" inverse="true">
+            <key>
+                <column name="CODIGO_ORIGEN"/>
+            </key>
+            <one-to-many class="co.edu.uptc.proveedores.modelo.Producto"/>
+        </set>
     </class>
+    <query name="todosLosOrigenes">
+        <![CDATA[
+           SELECT o FROM Origen o
+        ]]>
+    </query>
 </hibernate-mapping>

@@ -4,7 +4,7 @@
     <class name="co.edu.uptc.proveedores.modelo.Marca" table="MARCA">
         <id name="numero" type="java.lang.Integer">
             <column name="NUMERO"/>
-            <generator class="native" />
+            <generator class="assigned" />
         </id>
         <property name="nombre" type="string">
             <column name="NOMBRE"/>
@@ -12,5 +12,7 @@
         <property name="fechaRegistro" type="java.util.Date">
             <column name="FECHA_REGISTRO"/>
         </property>
+        <one-to-one name="proveedor" cascade="all" class="co.edu.uptc.proveedores.modelo.Proveedor">
+        </one-to-one>
     </class>
 </hibernate-mapping>

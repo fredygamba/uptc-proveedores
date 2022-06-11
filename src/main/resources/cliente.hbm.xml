@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="co.edu.uptc.proveedores.modelo.Cliente" table="CLIENTE">
+        <id name="numero" type="java.lang.Integer">
+            <column name="NUMERO"/>
+            <generator class="assigned" />
+        </id>
+        <property name="nombres" type="string">
+            <column name="NOMBRES"/>
+        </property>
+        <property name="apellidos" type="string">
+            <column name="APELLIDOS"/>
+        </property>
+        <property name="celular" type="string">
+            <column name="CELULAR"/>
+        </property>
+        <one-to-one name="cuenta" cascade="all" class="co.edu.uptc.proveedores.modelo.Cuenta">
+        </one-to-one>
+        <set name="referenciados" table="REFERENCIADO" cascade="all" inverse="false">
+            <key>
+                <column name="PRINCIPAL"/>
+            </key>
+            <many-to-many column="REFERENCIADO_POR" class="co.edu.uptc.proveedores.modelo.Cliente"/>
+        </set>
+        <set name="referenciadoPor" table="REFERENCIADO" cascade="all" inverse="true">
+            <key>
+                <column name="REFERENCIADO_POR"/>
+            </key>
+            <many-to-many column="PRINCIPAL" class="co.edu.uptc.proveedores.modelo.Cliente"/>
+        </set>
+    </class>
+</hibernate-mapping>

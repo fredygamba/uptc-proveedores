@@ -15,5 +15,7 @@
     <mapping resource="plan.hbm.xml"/>
     <mapping resource="canal.hbm.xml"/>
     <mapping resource="origen.hbm.xml"/>
+    <mapping resource="producto.hbm.xml"/>
+    <mapping resource="cliente.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,8 @@
 package co.edu.uptc.proveedores.modelo;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Esta clase es la representación de un origen.
@@ -19,6 +21,11 @@ public class Origen implements Serializable {
      * Descripción del origen.
      */
     private String descripcion;
+
+    /**
+     * Productos asociados.
+     */
+    private Set<Producto> productos = new HashSet<>();
 
     public Origen() {
     }
@@ -44,10 +51,18 @@ public class Origen implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
+
     @Override
     public String toString() {
-        return "Origen{" + "codigo=" + codigo
-                + ", descripcion=" + descripcion + '}';
+        return "Origen{" + "codigo=" + codigo + ", descripcion="
+                + descripcion + ", productos=" + productos + '}';
     }
 
 }

@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="co.edu.uptc.proveedores.modelo.Origen" table="ORIGEN">
+    <class name="co.edu.uptc.proveedores.modelo.Producto" table="PRODUCTO">
         <id name="codigo" type="java.lang.Integer">
             <column name="CODIGO"/>
             <generator class="assigned" />
         </id>
+        <property name="cargo" type="java.lang.Integer">
+            <column name="CARGO"/>
+        </property>
         <property name="descripcion" type="string">
             <column name="DESCRIPCION"/>
         </property>
-        <set name="productos" table="PRODUCTO" cascade="all" inverse="true">
-            <key>
-                <column name="CODIGO_ORIGEN"/>
-            </key>
-            <one-to-many class="co.edu.uptc.proveedores.modelo.Producto"/>
-        </set>
+        <property name="tipoProducto" type="string">
+            <column name="TIPO"/>
+        </property>
+        <many-to-one name="origen" cascade="all" class="co.edu.uptc.proveedores.modelo.Origen">
+            <column name="CODIGO_ORIGEN"/>
+        </many-to-one>
     </class>
-    <query name="todosLosOrigenes">
-        <![CDATA[
-           SELECT o FROM Origen o
-        ]]>
-    </query>
 </hibernate-mapping>

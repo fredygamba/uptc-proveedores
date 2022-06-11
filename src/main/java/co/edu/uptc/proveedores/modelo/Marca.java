@@ -26,13 +26,25 @@ public class Marca implements Serializable {
      */
     private String nombre;
 
+    /**
+     * Proveedor asociado.
+     */
+    private Proveedor proveedor;
+
     public Marca() {
     }
 
-    public Marca(Integer numMarca, String nombre, Date fechaRegistro) {
-        this.numero = numMarca;
-        this.nombre = nombre;
+    public Marca(Integer numero, Date fechaRegistro, String nombre) {
+        this.numero = numero;
         this.fechaRegistro = fechaRegistro;
+        this.nombre = nombre;
+    }
+
+    public Marca(Integer numero, Date fechaRegistro, String nombre, Proveedor proveedor) {
+        this.numero = numero;
+        this.fechaRegistro = fechaRegistro;
+        this.nombre = nombre;
+        this.proveedor = proveedor;
     }
 
     public Integer getNumero() {
@@ -59,10 +71,19 @@ public class Marca implements Serializable {
         this.nombre = nombre;
     }
 
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
     @Override
     public String toString() {
-        return "Marca{" + "numMarca=" + numero + ", nombre="
-                + nombre + ", fechaRegistro=" + fechaRegistro + '}';
+        return "Marca{" + "numero=" + numero + ", fechaRegistro="
+                + fechaRegistro + ", nombre=" + nombre + ", proveedor="
+                + proveedor + '}';
     }
 
 }

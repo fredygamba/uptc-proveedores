@@ -24,7 +24,7 @@ public class Producto implements Serializable {
     private String descripcion;
 
     /**
-     * Código del origen asociado.
+     * Origen asociado.
      */
     private Origen origen;
 
@@ -34,6 +34,13 @@ public class Producto implements Serializable {
     private String tipoProducto;
 
     public Producto() {
+    }
+
+    public Producto(Integer codigo, Integer cargo, String descripcion, String tipoProducto) {
+        this.codigo = codigo;
+        this.cargo = cargo;
+        this.descripcion = descripcion;
+        this.tipoProducto = tipoProducto;
     }
 
     public Producto(Integer codigo, Integer cargo, String descripcion, Origen origen, String tipoProducto) {

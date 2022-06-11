@@ -18,5 +18,7 @@
         <property name="telefono" type="string">
             <column name="TELEFONO"/>
         </property>
+        <one-to-one name="marca" cascade="all" class="co.edu.uptc.proveedores.modelo.Marca">
+        </one-to-one>
     </class>
 </hibernate-mapping>

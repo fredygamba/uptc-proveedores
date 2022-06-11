@@ -4,26 +4,31 @@ import java.io.Serializable;
 
 /**
  * Esta clase es la representación de una cuenta.
- * 
+ *
  * @author Fredy Alejandro Gamba Ortiz
  * @version 1.0
  */
 public class Cuenta implements Serializable {
-    
+
     /**
      * Identificación o código de la cuenta.
      */
     private Integer codigo;
-    
+
     /**
      * Dirección de la cuenta.
      */
     private String direccion;
-    
+
     /**
      * Teléfono de contacto asociado a la cuenta.
      */
     private String telefono;
+
+    /**
+     * Cliente asociado.
+     */
+    private Cliente cliente;
 
     public Cuenta() {
     }
@@ -32,6 +37,13 @@ public class Cuenta implements Serializable {
         this.codigo = codigo;
         this.direccion = direccion;
         this.telefono = telefono;
+    }
+
+    public Cuenta(Integer codigo, String direccion, String telefono, Cliente cliente) {
+        this.codigo = codigo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.cliente = cliente;
     }
 
     public Integer getCodigo() {
@@ -58,10 +70,18 @@ public class Cuenta implements Serializable {
         this.telefono = telefono;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     @Override
     public String toString() {
-        return "Cuenta{" + "codigo=" + codigo + ", direccion=" + 
-                direccion + ", telefono=" + telefono + '}';
+        return "Cuenta{" + "codigo=" + codigo + ", direccion=" + direccion
+                + ", telefono=" + telefono + ", cliente=" + cliente + '}';
     }
-    
+
 }
