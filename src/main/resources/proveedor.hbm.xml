@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="co.edu.uptc.proveedores.modelo.Proveedor" table="PROVEEDOR">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="CODIGO"/>
+            <generator class="assigned" />
+        </id>
+        <property name="contacto" type="string">
+            <column name="CONTACTO"/>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION"/>
+        </property>
+        <property name="paginaWeb" type="string">
+            <column name="PAGINA_WEB"/>
+        </property>
+        <property name="telefono" type="string">
+            <column name="TELEFONO"/>
+        </property>
+    </class>
+</hibernate-mapping>

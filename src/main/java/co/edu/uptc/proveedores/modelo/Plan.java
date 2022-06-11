@@ -1,9 +1,82 @@
 package co.edu.uptc.proveedores.modelo;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
+ * Esta clase es la representación de una plan de televisión.
  *
- * @author fredy
+ * @author Fredy Alejandro Gamba Ortiz
+ * @version 1.0
  */
-public class Plan {
-    
+public class Plan implements Serializable {
+
+    /**
+     * Código o identificación del plan de televisión.
+     */
+    private Integer codigo;
+
+    /**
+     * Canal de televisión del plan.
+     */
+    private Set<Canal> canales = new HashSet<>();
+
+    /**
+     * Costo del plan.
+     */
+    private Integer costo;
+
+    /**
+     * Nombre del plan.
+     */
+    private String nombre;
+
+    public Plan() {
+    }
+
+    public Plan(Integer codigo, Integer costo, String nombre) {
+        this.codigo = codigo;
+        this.costo = costo;
+        this.nombre = nombre;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Set<Canal> getCanales() {
+        return canales;
+    }
+
+    public void setCanales(Set<Canal> canales) {
+        this.canales = canales;
+    }
+
+    public Integer getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Integer costo) {
+        this.costo = costo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Plan{" + "codigo=" + codigo + ", canales=" + canales
+                + ", costo=" + costo + ", nombre=" + nombre + '}';
+    }
+
 }

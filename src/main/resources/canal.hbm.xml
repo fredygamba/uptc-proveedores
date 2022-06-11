@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="co.edu.uptc.proveedores.modelo.Canal" table="CANAL">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="CODIGO"/>
+            <generator class="assigned" />
+        </id>
+        <property name="logo" type="string">
+            <column name="LOGO"/>
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE"/>
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO_CANAL"/>
+        </property>
+        <set name="planes" table="PLAN_CANAL" cascade="all" inverse="false">
+            <key>
+                <column name="CODIGO_CANAL"/>
+            </key>
+            <many-to-many column="CODIGO_PLAN" class="co.edu.uptc.proveedores.modelo.Plan"/>
+        </set>
+    </class>
+</hibernate-mapping>
