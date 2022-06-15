@@ -11,24 +11,9 @@ import java.util.Date;
  */
 public class Marca implements Serializable {
 
-    /**
-     * Identificación o número de la marca.
-     */
     private Integer numero;
-
-    /**
-     * Fecha de registro de la marca.
-     */
     private Date fechaRegistro;
-
-    /**
-     * Nombre de la marca.
-     */
     private String nombre;
-
-    /**
-     * Proveedor asociado.
-     */
     private Proveedor proveedor;
 
     public Marca() {
@@ -81,9 +66,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "Marca{" + "numero=" + numero + ", fechaRegistro="
-                + fechaRegistro + ", nombre=" + nombre + ", proveedor="
-                + proveedor + '}';
+        return "Marca{" + "numero=" + numero + ", fechaRegistro=" + fechaRegistro + ", nombre=" + nombre + '}';
     }
 
 }

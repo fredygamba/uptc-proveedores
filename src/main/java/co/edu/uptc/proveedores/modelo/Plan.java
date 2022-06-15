@@ -12,24 +12,9 @@ import java.util.Set;
  */
 public class Plan implements Serializable {
 
-    /**
-     * Código o identificación del plan de televisión.
-     */
     private Integer codigo;
-
-    /**
-     * Canal de televisión del plan.
-     */
     private Set<Canal> canales = new HashSet<>();
-
-    /**
-     * Costo del plan.
-     */
     private Integer costo;
-
-    /**
-     * Nombre del plan.
-     */
     private String nombre;
 
     public Plan() {

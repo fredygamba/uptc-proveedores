@@ -10,24 +10,9 @@ import java.io.Serializable;
  */
 public class Cuenta implements Serializable {
 
-    /**
-     * Identificación o código de la cuenta.
-     */
     private Integer codigo;
-
-    /**
-     * Dirección de la cuenta.
-     */
     private String direccion;
-
-    /**
-     * Teléfono de contacto asociado a la cuenta.
-     */
     private String telefono;
-
-    /**
-     * Cliente asociado.
-     */
     private Cliente cliente;
 
     public Cuenta() {

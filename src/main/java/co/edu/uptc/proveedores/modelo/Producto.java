@@ -8,29 +8,10 @@ import java.io.Serializable;
  */
 public class Producto implements Serializable {
 
-    /**
-     * Código o identificación del producto.
-     */
     private Integer codigo;
-
-    /**
-     * Cargo del producto.
-     */
     private Integer cargo;
-
-    /**
-     * Descripción del producto.
-     */
     private String descripcion;
-
-    /**
-     * Origen asociado.
-     */
     private Origen origen;
-
-    /**
-     * Tipo de producto.
-     */
     private String tipoProducto;
 
     public Producto() {

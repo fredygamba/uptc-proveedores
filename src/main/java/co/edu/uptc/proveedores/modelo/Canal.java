@@ -12,24 +12,9 @@ import java.util.Set;
  */
 public class Canal implements Serializable {
 
-    /**
-     * Código o identificación del canal.
-     */
     private Integer codigo;
-
-    /**
-     * Logo del canal.
-     */
     private String logo;
-
-    /**
-     * Nombre del canal.
-     */
     private String nombre;
-
-    /**
-     * Planeas asociados al canal.
-     */
     private Set<Plan> planes = new HashSet<>();
 
     /**

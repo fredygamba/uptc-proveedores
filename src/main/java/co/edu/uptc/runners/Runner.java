@@ -1,5 +1,6 @@
 package co.edu.uptc.runners;
 
+import co.edu.uptc.proveedores.dao.ProveedorDAO;
 import co.edu.uptc.proveedores.modelo.Canal;
 import co.edu.uptc.proveedores.modelo.Cliente;
 import co.edu.uptc.proveedores.modelo.Cuenta;
@@ -8,6 +9,8 @@ import co.edu.uptc.proveedores.modelo.Origen;
 import co.edu.uptc.proveedores.modelo.Plan;
 import co.edu.uptc.proveedores.modelo.Producto;
 import co.edu.uptc.proveedores.modelo.Proveedor;
+import co.edu.uptc.proveedores.vista.MainFrame;
+import co.edu.uptc.proveedores.vista.VistaPrincipal;
 import co.edu.uptc.utils.DBUtils;
 import co.edu.uptc.utils.HibernateUtil;
 import java.util.Date;
@@ -23,88 +26,112 @@ import org.hibernate.SessionFactory;
  */
 public class Runner {
 
-    public void testClientesClientes() {
-        Cliente cliente1 = new Cliente(172, "Fredy", "Gamba", "123");
-        Cliente cliente2 = new Cliente(173, "Alejandro", "Ortiz", "456");
-        cliente1.getReferenciados().add(cliente2);
-        cliente2.getReferenciadoPor().add(cliente1);
-        DBUtils.save(cliente1);
+    /**
+     * Función principal de la aplicación.
+     *
+     * @param args Argumentos de inicio de la aplicación.
+     */
+    public static void main(String[] args) {
+//        Runner runner = new Runner();
+//        runner.ejecutarSesion2();
+//        runner.ejecutarActividad1();
+//        runner.ejecutarSession3();
+//        runner.ejecutarPresentacion3();
+//        runner.ejecutarPresentacion4();
+//        runner.ejecutarPresentacion5();
+//        runner.testHQLOrigen();
+//        MainFrame mainFrame = new MainFrame();
+//        mainFrame.setVisible(true);
+        new VistaPrincipal().setVisible(true);
     }
 
-    public void testOneToOne() {
-        Proveedor proveedor = new Proveedor();
-        proveedor.setCodigo(1002);
-        proveedor.setContacto("Alejo contacto");
-        proveedor.setDescripcion("Soy otro proveedor");
-        proveedor.setPaginaWeb("http://www.youtube.com");
-        proveedor.setTelefono("321");
-
-        Marca marca = new Marca();
-        marca.setNumero(123123);
-        marca.setNombre("BRAMA");
-        marca.setFechaRegistro(new Date());
-        marca.setProveedor(proveedor);
-        DBUtils.save(marca);
-    }
-
-    public void testClientes() {
-        Cliente cliente = new Cliente(1, "Fredy", "gamba", "123");
-        DBUtils.save(cliente);
-    }
-
-    public void gestionarMarcasYProveedores() {
-        // Crear una nueva marca
-        Marca marca = new Marca();
-        marca.setNombre("BRAMA");
-        marca.setFechaRegistro(new Date());
-        Integer marcaId = (Integer) DBUtils.save(marca);
-
-        // Seleccionar la marca creada.
-        System.out.println("Se ha creado la marca: "
-                + DBUtils.findById(Marca.class, marcaId));
-
-        // Seleccionar todas las marcas
-        System.out.println("Marcas agregadas: " + DBUtils.findAll(Marca.class));
-
-        // Actualizar marca
-        marca.setNombre("MUSTANG");
-        DBUtils.update(marca);
-        System.out.println("Se ha actualizado la marca " + marcaId
-                + " con: " + DBUtils.findById(Marca.class, marcaId));
-
+    public void ejecutarSesion2() {
         // Agregar proveedor
         Proveedor proveedor = new Proveedor();
-        proveedor.setCodigo(marcaId);
+        proveedor.setCodigo(1);
         proveedor.setContacto("Alejo contacto");
         proveedor.setDescripcion("Soy otro proveedor");
         proveedor.setPaginaWeb("http://www.youtube.com");
         proveedor.setTelefono("321");
         Integer proveedorId = (Integer) DBUtils.save(proveedor);
 
-        // Seleccionar el proveedor creado.
+//      Seleccionar el proveedor creado.
         System.out.println("Se ha creado el proveedor: "
                 + DBUtils.findById(Proveedor.class, proveedorId));
-
+//
         // Seleccionar todas las marcas
         System.out.println("Proveedores agregados: "
                 + DBUtils.findAll(Proveedor.class));
-
+//
         // Actualizar proveedor
         proveedor.setContacto("Alejandro contacto");
         DBUtils.update(proveedor);
         System.out.println("Se ha actualizado el proveedor " + proveedorId
                 + " con: " + DBUtils.findById(Proveedor.class, proveedorId));
 
+        // Crear una nueva marca
+        Marca marca = new Marca();
+        marca.setNumero(proveedor.getCodigo());
+        marca.setNombre("BRAMA");
+        marca.setFechaRegistro(new Date());
+        Integer marcaId = (Integer) DBUtils.save(marca);
+
+//      Seleccionar la marca creada.
+        System.out.println("Se ha creado la marca: "
+                + DBUtils.findById(Marca.class, marcaId));
+
+//      Seleccionar todas las marcas
+        System.out.println("Marcas agregadas: " + DBUtils.findAll(Marca.class));
+
+//      Actualizar marca
+        marca.setNombre("MUSTANG");
+        DBUtils.update(marca);
+        System.out.println("Se ha actualizado la marca " + marcaId
+                + " con: " + DBUtils.findById(Marca.class, marcaId));
+
         // Eliminar proveedor
         DBUtils.delete(Proveedor.class, proveedorId);
         System.out.println("Se ha eliminado el proveedor " + proveedorId);
-
-        // Eliminar marca
-        DBUtils.delete(Marca.class, marcaId);
-        System.out.println("Se ha eliminado la marca " + marcaId);
     }
 
-    private void gestionarPlanes() {
+    public void ejecutarActividad1() {
+        Cuenta cuenta = new Cuenta(1, "Dirección falsa 456", "456");
+        DBUtils.save(cuenta);
+    }
+
+    // One to one
+    public void ejecutarSession3() {
+        Proveedor proveedor1 = new Proveedor();
+        proveedor1.setCodigo(2);
+        proveedor1.setContacto("Alejo 1");
+        proveedor1.setDescripcion("Soy otro proveedor 1");
+        proveedor1.setPaginaWeb("http://www.youtube.com 1");
+        proveedor1.setTelefono("321");
+        DBUtils.save(proveedor1);
+
+        Marca marca1 = new Marca();
+        marca1.setNumero(proveedor1.getCodigo());
+        marca1.setNombre("BRAMA 1");
+        marca1.setFechaRegistro(new Date());
+        marca1.setProveedor(proveedor1);
+        DBUtils.save(marca1);
+
+//        Proveedor proveedor2 = new Proveedor();
+//        proveedor2.setCodigo(3);
+//        proveedor2.setContacto("Alejo 2");
+//        proveedor2.setDescripcion("Soy otro proveedor 2");
+//        proveedor2.setPaginaWeb("http://www.youtube.com 2");
+//        proveedor2.setTelefono("123");
+//
+//        Marca marca2 = new Marca();
+//        marca2.setNumero(proveedor2.getCodigo());
+//        marca2.setNombre("MUSTANG");
+//        marca2.setFechaRegistro(new Date());
+//        marca2.setProveedor(proveedor2);
+//        DBUtils.save(proveedor2);
+    }
+
+    public void ejecutarPresentacion3() {
         Plan plan1 = new Plan();
         plan1.setCodigo(100);
         plan1.setNombre("TV SATELITAL 100");
@@ -147,14 +174,56 @@ public class Runner {
         DBUtils.save(plan1);
     }
 
-    /**
-     * Función principal de la aplicación.
-     *
-     * @param args Argumentos de inicio de la aplicación.
-     */
-    public static void main(String[] args) {
-        new Runner().testClientesClientes();
-//        new Runner().testHQLOrigen();
+    public void ejecutarPresentacion4() {
+        Origen origen1 = new Origen(11, "CABLE UPT");
+        Origen origen2 = new Origen(12, "SATELITAL");
+
+        Producto producto1 = new Producto(1000, 0, "TELEVISIÓN POR CABLE 1000", origen1, "TELEVISIÓN");
+        Producto producto2 = new Producto(1001, 0, "INTERNET POR CABLE 1001", origen1, "INTERNET");
+        Producto producto3 = new Producto(1002, 0, "INTERNET SATELITA 1002", origen2, "INTERNET");
+        DBUtils.save(producto1);
+        DBUtils.save(producto2);
+        DBUtils.save(producto3);
+    }
+
+    public void ejecutarPresentacion5() {
+        // Muchos a uno
+        Origen origen1 = new Origen(23, "ANTENAS TERRESTRES");
+        Origen origen2 = new Origen(24, "FIBRA ÓTICA");
+
+        Producto producto1 = new Producto(5000, 5555, "APP TDT", origen1, "TELEVISIÓN");
+        Producto producto2 = new Producto(5001, 3333, "APP INTERNET ANTENAS", origen1, "INTERNET");
+        Producto producto3 = new Producto(5003, 2222, "APP INTERNET FIBRA", origen2, "INTERNET");
+
+        origen1.getProductos().add(producto1);
+        origen1.getProductos().add(producto2);
+        origen1.getProductos().add(producto3);
+        DBUtils.save(origen1);
+        DBUtils.save(origen2);
+    }
+
+    public void testClientesClientes() {
+        Cliente cliente1 = new Cliente(172, "Fredy", "Gamba", "123");
+        Cliente cliente2 = new Cliente(173, "Alejandro", "Ortiz", "456");
+        cliente1.getReferenciados().add(cliente2);
+        cliente2.getReferenciadoPor().add(cliente1);
+        DBUtils.save(cliente1);
+    }
+
+    public void testProveedorDao() {
+        ProveedorDAO proveedorDAO = new ProveedorDAO();
+        Proveedor proveedor = new Proveedor();
+        proveedor.setCodigo(12322);
+        proveedor.setContacto("Alejo contacto");
+        proveedor.setDescripcion("Soy otro proveedor");
+        proveedor.setPaginaWeb("http://www.youtube.com");
+        proveedor.setTelefono("321");
+        proveedorDAO.agregar(proveedor);
+    }
+
+    public void testClientes() {
+        Cliente cliente = new Cliente(1, "Fredy", "gamba", "123");
+        DBUtils.save(cliente);
     }
 
     public void testSQLOrigen() {
@@ -217,34 +286,6 @@ public class Runner {
         Cliente cliente = new Cliente(13, "Alejandro", "Ortiz", "124");
         cuenta.setCliente(cliente);
         DBUtils.save(cuenta);
-    }
-
-    public void gestionarUnoAMuchos() {
-        Origen origen1 = new Origen(11, "CABLE UPT");
-        Origen origen2 = new Origen(12, "SATELITAL");
-
-        Producto producto1 = new Producto(1000, 0, "TELEVISIÓN POR CABLE 1000", origen1, "TELEVISIÓN");
-        Producto producto2 = new Producto(1001, 0, "INTERNET POR CABLE 1001", origen1, "INTERNET");
-        Producto producto3 = new Producto(1002, 0, "INTERNET SATELITA 1002", origen2, "INTERNET");
-        DBUtils.save(producto1);
-        DBUtils.save(producto2);
-        DBUtils.save(producto3);
-    }
-
-    public void gestionarMuchosAUno() {
-        // Muchos a uno
-        Origen origen1 = new Origen(23, "ANTENAS TERRESTRES");
-        Origen origen2 = new Origen(24, "FIBRA ÓTICA");
-
-        Producto producto1 = new Producto(5000, 5555, "APP TDT", origen1, "TELEVISIÓN");
-        Producto producto2 = new Producto(5001, 3333, "APP INTERNET ANTENAS", origen1, "INTERNET");
-        Producto producto3 = new Producto(5003, 2222, "APP INTERNET FIBRA", origen2, "INTERNET");
-
-        origen1.getProductos().add(producto1);
-        origen1.getProductos().add(producto2);
-        origen1.getProductos().add(producto3);
-        DBUtils.save(origen1);
-        DBUtils.save(origen2);
     }
 
 }

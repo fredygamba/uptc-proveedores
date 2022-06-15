@@ -12,19 +12,8 @@ import java.util.Set;
  */
 public class Origen implements Serializable {
 
-    /**
-     * Código o identificación del origen.
-     */
     private Integer codigo;
-
-    /**
-     * Descripción del origen.
-     */
     private String descripcion;
-
-    /**
-     * Productos asociados.
-     */
     private Set<Producto> productos = new HashSet<>();
 
     public Origen() {

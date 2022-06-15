@@ -10,34 +10,11 @@ import java.io.Serializable;
  */
 public class Proveedor implements Serializable {
 
-    /**
-     * Código o identificación del proveedor.
-     */
     private Integer codigo;
-
-    /**
-     * Contacto asociado al proveedor.
-     */
     private String contacto;
-
-    /**
-     * Descripción del proveedor.
-     */
     private String descripcion;
-
-    /**
-     * Página web del proveedor.
-     */
     private String paginaWeb;
-
-    /**
-     * Teléfono de contacto del proveedor.
-     */
     private String telefono;
-
-    /**
-     * Marca asociadada.
-     */
     private Marca marca;
 
     public Proveedor() {
@@ -114,7 +91,7 @@ public class Proveedor implements Serializable {
     public String toString() {
         return "Proveedor{" + "codigo=" + codigo + ", contacto=" + contacto
                 + ", descripcion=" + descripcion + ", paginaWeb=" + paginaWeb
-                + ", telefono=" + telefono + ", marca=" + marca + '}';
+                + ", telefono=" + telefono + '}';
     }
 
 }

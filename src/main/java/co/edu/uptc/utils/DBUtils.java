@@ -29,6 +29,33 @@ public class DBUtils {
      * @param type Tipo de dato a eliminar.
      * @param id Identifiación del registro asociado.
      */
+    public static void delete(Object object) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        if (sessionFactory != null) {
+            Session session = sessionFactory.openSession();
+            Transaction tx = null;
+            try {
+                tx = session.beginTransaction();
+                session.delete(object);
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                Logger.getLogger(Runner.class.getName()).log(Level.SEVERE, null, e);
+            } finally {
+                session.close();
+            }
+        }
+    }
+
+    /**
+     * Permite eliminar un registro.
+     *
+     * @param <T> Tipo de dato parametrizable.
+     * @param type Tipo de dato a eliminar.
+     * @param id Identifiación del registro asociado.
+     */
     public static <T> void delete(Class<T> type, Serializable id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         if (sessionFactory != null) {
