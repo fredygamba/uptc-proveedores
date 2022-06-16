@@ -66,7 +66,8 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "Marca{" + "numero=" + numero + ", fechaRegistro=" + fechaRegistro + ", nombre=" + nombre + '}';
+        return "Número: " + numero + ", nombre=" + nombre + ", proveedor=" + 
+                (proveedor != null ? proveedor.getDescripcion(): "");
     }
 
 }

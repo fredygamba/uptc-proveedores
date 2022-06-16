@@ -60,8 +60,8 @@ public class Plan implements Serializable {
 
     @Override
     public String toString() {
-        return "Plan{" + "codigo=" + codigo + ", canales=" + canales
-                + ", costo=" + costo + ", nombre=" + nombre + '}';
+        return "Plan{" + "codigo=" + codigo + ", costo=" + costo
+                + ", nombre=" + nombre + '}';
     }
 
 }

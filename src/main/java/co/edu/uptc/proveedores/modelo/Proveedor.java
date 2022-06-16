@@ -89,9 +89,9 @@ public class Proveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "Proveedor{" + "codigo=" + codigo + ", contacto=" + contacto
-                + ", descripcion=" + descripcion + ", paginaWeb=" + paginaWeb
-                + ", telefono=" + telefono + '}';
+        return "Código: " + codigo + ", contacto: " + contacto
+                + ", Descripcion: " + descripcion + ", Pagina web: " + paginaWeb
+                + ", Teléfono: " + telefono + '}';
     }
 
 }

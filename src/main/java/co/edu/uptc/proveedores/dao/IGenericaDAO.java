@@ -5,7 +5,6 @@
  */
 package co.edu.uptc.proveedores.dao;
 
-import co.edu.uptc.proveedores.modelo.Proveedor;
 import java.util.List;
 import org.hibernate.HibernateException;
 
@@ -20,9 +19,9 @@ public interface IGenericaDAO<T> {
 
     public Integer agregar(T objeto) throws HibernateException;
 
-    public Proveedor consultar(Integer codigo) throws HibernateException;
+    public T consultar(Integer codigo) throws HibernateException;
 
-    public List<Proveedor> consultar() throws HibernateException;
+    public List<T> consultar() throws HibernateException;
 
     public void eliminar(T objeto) throws HibernateException;
 

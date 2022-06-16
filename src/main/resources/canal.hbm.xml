@@ -15,7 +15,7 @@
         <property name="tipo" type="string">
             <column name="TIPO_CANAL"/>
         </property>
-        <set name="planes" table="PLAN_CANAL" cascade="all" inverse="false">
+        <set name="planes" table="PLAN_CANAL" cascade="all" inverse="false" fetch="join" lazy="false">
             <key>
                 <column name="CODIGO_CANAL"/>
             </key>

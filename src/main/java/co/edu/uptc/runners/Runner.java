@@ -1,5 +1,6 @@
 package co.edu.uptc.runners;
 
+import co.edu.uptc.proveedores.controlador.ControladorPrincipal;
 import co.edu.uptc.proveedores.dao.ProveedorDAO;
 import co.edu.uptc.proveedores.modelo.Canal;
 import co.edu.uptc.proveedores.modelo.Cliente;
@@ -9,8 +10,6 @@ import co.edu.uptc.proveedores.modelo.Origen;
 import co.edu.uptc.proveedores.modelo.Plan;
 import co.edu.uptc.proveedores.modelo.Producto;
 import co.edu.uptc.proveedores.modelo.Proveedor;
-import co.edu.uptc.proveedores.vista.MainFrame;
-import co.edu.uptc.proveedores.vista.VistaPrincipal;
 import co.edu.uptc.utils.DBUtils;
 import co.edu.uptc.utils.HibernateUtil;
 import java.util.Date;
@@ -42,7 +41,7 @@ public class Runner {
 //        runner.testHQLOrigen();
 //        MainFrame mainFrame = new MainFrame();
 //        mainFrame.setVisible(true);
-        new VistaPrincipal().setVisible(true);
+        new ControladorPrincipal().iniciarAplicacion();
     }
 
     public void ejecutarSesion2() {

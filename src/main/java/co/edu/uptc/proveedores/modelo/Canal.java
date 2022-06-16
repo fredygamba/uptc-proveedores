@@ -75,7 +75,7 @@ public class Canal implements Serializable {
     @Override
     public String toString() {
         return "Canal{" + "codigo=" + codigo + ", logo=" + logo + ", nombre="
-                + nombre + ", planes=" + planes + ", tipo=" + tipo + '}';
+                + nombre + ", tipo=" + tipo + '}';
     }
 
 }
