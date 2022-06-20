@@ -282,6 +282,7 @@ public class ControladorPrincipal implements ActionListener {
     private void actualizarPlan() {
         PlanVistaPanel planVista = this.mainFrame.getPlanVista();
         Plan plan = planVista.getPlan();
+        System.out.println(plan.getCanales());
         if (this.planDAO.consultar(plan.getCodigo()) == null) {
             JOptionPane.showMessageDialog(null, "No se encontró el plan ingresado.");
         } else {
@@ -671,7 +672,7 @@ public class ControladorPrincipal implements ActionListener {
         Plan plan = this.planDAO.consultar(planVista.getPlan().getCodigo());
         if (plan == null) {
             JOptionPane.showMessageDialog(null, "No se encontró el plan.");
-        } else {
+        } else if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el plan?") == 0){
             this.planDAO.eliminar(plan);
             planVista.limpiarFormulario();
             planVista.setPlanes(this.planDAO.consultar());
