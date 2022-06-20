@@ -274,14 +274,27 @@ public class ProveedorVistaPanel extends javax.swing.JPanel {
         this.inputPaginaWeb.setText(proveedor.getPaginaWeb());
         this.inputTelefono.setText(proveedor.getTelefono());
         Marca marcaIndex;
-        for (int i = 0; i < this.inputMarca.getItemCount(); i++) {
-            marcaIndex = this.inputMarca.getItemAt(i);
-            if (marcaIndex != null && marcaIndex.toString()
-                    .equals(proveedor.getMarca().toString())) {
-                inputMarca.setSelectedIndex(i);
-                break;
+        if (proveedor.getMarca() != null) {
+            for (int i = 0; i < this.inputMarca.getItemCount(); i++) {
+                marcaIndex = this.inputMarca.getItemAt(i);
+                if (marcaIndex != null && marcaIndex.toString()
+                        .equals(proveedor.getMarca().toString())) {
+                    inputMarca.setSelectedIndex(i);
+                    break;
+                }
             }
+        } else {
+            inputMarca.setSelectedItem(null);
         }
+    }
+
+    public void limpiarFormulario() {
+        this.inputCodigo.setValue(0);
+        this.inputContacto.setText("");
+        this.inputDescripcion.setText("");
+        this.inputMarca.setSelectedItem(null);
+        this.inputPaginaWeb.setText("");
+        this.inputTelefono.setText("");
     }
 
 }

@@ -66,7 +66,7 @@ public class Cuenta implements Serializable {
     @Override
     public String toString() {
         return "Cuenta{" + "codigo=" + codigo + ", direccion=" + direccion
-                + ", telefono=" + telefono + ", cliente=" + cliente + '}';
+                + ", telefono=" + telefono + '}';
     }
 
 }

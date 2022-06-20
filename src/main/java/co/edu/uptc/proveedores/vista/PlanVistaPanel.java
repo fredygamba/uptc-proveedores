@@ -94,6 +94,8 @@ public class PlanVistaPanel extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaPlanes = new javax.swing.JTable();
+        inputCodigo = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -106,6 +108,11 @@ public class PlanVistaPanel extends javax.swing.JPanel {
         jLabel4.setText("Canales:");
 
         btnEliminarCanal.setText("-");
+        btnEliminarCanal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCanalActionPerformed(evt);
+            }
+        });
 
         btnAgregarCanal.setText("+");
 
@@ -138,6 +145,8 @@ public class PlanVistaPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tablaPlanes);
 
+        jLabel2.setText("Código:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,20 +158,22 @@ public class PlanVistaPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre)
-                            .addComponent(lblCosto))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputNombre)
-                            .addComponent(inputCosto)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregarCanal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarCanal))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre)
+                            .addComponent(lblCosto)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputNombre)
+                            .addComponent(inputCosto)
+                            .addComponent(inputCodigo))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -170,6 +181,10 @@ public class PlanVistaPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inputCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
@@ -183,16 +198,21 @@ public class PlanVistaPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnEliminarCanal)
                         .addComponent(btnAgregarCanal))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarCanalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCanalActionPerformed
+        // TODO add your handling code here:
+        this.eliminarCanalSeleccionado();
+    }//GEN-LAST:event_btnEliminarCanalActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -202,9 +222,11 @@ public class PlanVistaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarCanal;
+    private javax.swing.JSpinner inputCodigo;
     private javax.swing.JSpinner inputCosto;
     private javax.swing.JTextField inputNombre;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -222,6 +244,7 @@ public class PlanVistaPanel extends javax.swing.JPanel {
 
     public Plan getPlan() {
         Plan plan = new Plan();
+        plan.setCodigo((Integer) this.inputCodigo.getValue());
         plan.setCanales(this.canales);
         plan.setCosto((Integer) this.inputCosto.getValue());
         plan.setNombre(this.inputNombre.getText());
@@ -236,7 +259,7 @@ public class PlanVistaPanel extends javax.swing.JPanel {
         if (index >= 0) {
             Canal canal = (Canal) this.canales.toArray()[index];
             this.canales.remove(canal);
-            this.defaultListModel.removeElement(canal.getNombre());
+            this.defaultListModel.remove(index);
         }
     }
 
@@ -254,7 +277,9 @@ public class PlanVistaPanel extends javax.swing.JPanel {
         this.inputCosto.setValue(plan.getCosto());
         this.canales = plan.getCanales();
         this.defaultListModel.removeAllElements();
+        System.out.println(plan.getCanales().size());
         for (Canal canal : plan.getCanales()) {
+            System.out.println(canal);
             this.defaultListModel.addElement(canal.getNombre());
         }
     }

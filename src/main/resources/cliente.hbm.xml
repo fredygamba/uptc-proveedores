@@ -15,15 +15,15 @@
         <property name="celular" type="string">
             <column name="CELULAR"/>
         </property>
-        <one-to-one name="cuenta" cascade="all" class="co.edu.uptc.proveedores.modelo.Cuenta">
+        <one-to-one name="cuenta" cascade="merge" class="co.edu.uptc.proveedores.modelo.Cuenta">
         </one-to-one>
-        <set name="referenciados" table="REFERENCIADO" cascade="all" inverse="false">
+        <set name="referenciados" table="REFERENCIADO" cascade="merge" inverse="false" lazy="false">
             <key>
                 <column name="PRINCIPAL"/>
             </key>
             <many-to-many column="REFERENCIADO_POR" class="co.edu.uptc.proveedores.modelo.Cliente"/>
         </set>
-        <set name="referenciadoPor" table="REFERENCIADO" cascade="all" inverse="true">
+        <set name="referenciadoPor" table="REFERENCIADO" cascade="merge" inverse="true" lazy="false">
             <key>
                 <column name="REFERENCIADO_POR"/>
             </key>

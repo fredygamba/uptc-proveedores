@@ -107,9 +107,10 @@ public class DBUtils {
         T object = null;
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         if (sessionFactory != null) {
-            Session sesion = sessionFactory.openSession();
-            object = (T) sesion.get(type, id);
-            sesion.close();
+            Session session = sessionFactory.openSession();
+            object = (T) session.get(type, id);
+            session.flush();
+            session.close();
         }
         return object;
     }
@@ -157,6 +158,7 @@ public class DBUtils {
                 tx = session.beginTransaction();
                 session.update(object);
                 tx.commit();
+                session.flush();
             } catch (HibernateException e) {
                 if (tx != null) {
                     tx.rollback();

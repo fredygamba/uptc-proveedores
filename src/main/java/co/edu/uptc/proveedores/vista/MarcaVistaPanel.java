@@ -35,6 +35,12 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
     private void initActions() {
         this.btnAgregar.addActionListener(controladorPrincipal);
         this.btnAgregar.setActionCommand(ControladorPrincipal.ACCION_AGREGAR_MARCA);
+        this.btnConsultar.addActionListener(controladorPrincipal);
+        this.btnConsultar.setActionCommand(ControladorPrincipal.ACCION_CONSULTAR_MARCA);
+        this.btnActualizar.addActionListener(controladorPrincipal);
+        this.btnActualizar.setActionCommand(controladorPrincipal.ACCION_ACTUALIZAR_MARCA);
+        this.btnEliminar.addActionListener(controladorPrincipal);
+        this.btnEliminar.setActionCommand(ControladorPrincipal.ACCION_ELIMINAR_MARCA);
     }
 
     /**
@@ -47,43 +53,27 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        lblNumero = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         inputNombre = new javax.swing.JTextField();
-        inputNumero = new javax.swing.JSpinner();
         lblProveedor = new javax.swing.JLabel();
         inputProveedor = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaMarcas = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaMarcas = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MARCAS");
 
-        lblNumero.setText("Número:");
+        lblNombre.setText("Proveedor:");
 
-        lblNombre.setText("Nombre:");
+        lblProveedor.setText("Nombre:");
 
-        lblProveedor.setText("Proveedor");
-
-        jPanel1.setLayout(new java.awt.GridLayout());
-
-        btnAgregar.setText("Agregar");
-        jPanel1.add(btnAgregar);
-
-        btnConsultar.setText("Consultar");
-        jPanel1.add(btnConsultar);
-
-        btnActualizar.setText("Actualizar");
-        jPanel1.add(btnActualizar);
-
-        btnEliminar.setText("Eliminar");
-        jPanel1.add(btnEliminar);
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         tablaMarcas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,6 +88,14 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tablaMarcas);
 
+        btnAgregar.setText("Agregar");
+
+        btnConsultar.setText("Consultar");
+
+        btnActualizar.setText("Actualizar");
+
+        btnEliminar.setText("Eliminar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,15 +107,22 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputNumero)
-                            .addComponent(inputNombre)
-                            .addComponent(inputProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1))
+                            .addComponent(inputProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputNombre)))
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -127,17 +132,19 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputProveedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputProveedor)
-                    .addComponent(lblProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar))
+                .addGap(6, 6, 6)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,21 +159,23 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JTextField inputNombre;
-    private javax.swing.JSpinner inputNumero;
     private javax.swing.JComboBox<co.edu.uptc.proveedores.modelo.Proveedor> inputProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JTable tablaMarcas;
     // End of variables declaration//GEN-END:variables
 
     public Marca getMarca() {
         Marca marca = new Marca();
+        Proveedor proveedor = (Proveedor) inputProveedor.getSelectedItem();
+        if (proveedor != null) {
+            marca.setNumero(proveedor.getCodigo());
+        }
         marca.setNombre(inputNombre.getText());
-        marca.setProveedor((Proveedor) inputProveedor.getSelectedItem());
+        marca.setProveedor(proveedor);
         return marca;
     }
 
@@ -180,8 +189,26 @@ public class MarcaVistaPanel extends javax.swing.JPanel {
 
     public void setProveedores(List<Proveedor> proveedores) {
         this.inputProveedor.removeAllItems();
+        this.inputProveedor.addItem(null);
         for (Proveedor proveedor : proveedores) {
             this.inputProveedor.addItem(proveedor);
+        }
+    }
+
+    public void limpiarFormulario() {
+        this.inputProveedor.setSelectedItem(null);
+        this.inputNombre.setText("");
+    }
+
+    public void setMarca(Marca marca) {
+        this.inputNombre.setText(marca.getNombre());
+        Proveedor proveedor;
+        for (int i = 0; i < this.inputProveedor.getItemCount(); i++) {
+            proveedor = this.inputProveedor.getItemAt(i);
+            if (proveedor != null && proveedor.getCodigo().equals(marca.getNumero())) {
+                this.inputProveedor.setSelectedIndex(i);
+                break;
+            }
         }
     }
 

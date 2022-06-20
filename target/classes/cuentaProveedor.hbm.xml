@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="co.edu.uptc.proveedores.modelo.CuentaProveedor" table="CUENTA_PROVEEDOR">
+        <composite-id name="id" class="co.edu.uptc.proveedores.modelo.CuentaProveedorId">
+            <key-property name="codigoProveedor" type="java.lang.Integer">
+                <column name="codigo_proveedor"/>
+            </key-property>
+            <key-property name="codigoCuenta" type="java.lang.Integer">
+                <column name="codigo_cuenta"/>
+            </key-property>
+        </composite-id>
+        <many-to-one name="plan" cascade="all" class="co.edu.uptc.proveedores.modelo.Plan">
+            <column name="codigo_plan"/>
+        </many-to-one>
+        <many-to-one name="producto" cascade="all" class="co.edu.uptc.proveedores.modelo.Producto">
+            <column name="codigo_producto"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

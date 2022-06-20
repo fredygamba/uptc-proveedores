@@ -5,9 +5,13 @@ import co.edu.uptc.proveedores.dao.ProveedorDAO;
 import co.edu.uptc.proveedores.modelo.Canal;
 import co.edu.uptc.proveedores.modelo.Cliente;
 import co.edu.uptc.proveedores.modelo.Cuenta;
+import co.edu.uptc.proveedores.modelo.CuentaProveedor;
+import co.edu.uptc.proveedores.modelo.CuentaProveedorId;
 import co.edu.uptc.proveedores.modelo.Marca;
 import co.edu.uptc.proveedores.modelo.Origen;
 import co.edu.uptc.proveedores.modelo.Plan;
+import co.edu.uptc.proveedores.modelo.PlanCanal2;
+import co.edu.uptc.proveedores.modelo.PlanCanal2Id;
 import co.edu.uptc.proveedores.modelo.Producto;
 import co.edu.uptc.proveedores.modelo.Proveedor;
 import co.edu.uptc.utils.DBUtils;
@@ -39,9 +43,40 @@ public class Runner {
 //        runner.ejecutarPresentacion4();
 //        runner.ejecutarPresentacion5();
 //        runner.testHQLOrigen();
-//        MainFrame mainFrame = new MainFrame();
-//        mainFrame.setVisible(true);
+//        new Runner().ejecutarTestLlaveCompuesta();
+//        new Runner().ejecutarTestLlaveCompuesta2();
         new ControladorPrincipal().iniciarAplicacion();
+    }
+    
+    public void ejecutarTestLlaveCompuesta() {
+//        PlanCanal2Id id = new PlanCanal2Id();
+//        id.setCodigoCanal(1);
+//        id.setCodigoPlan(100);
+//        
+//        PlanCanal2 planCanal = new PlanCanal2();
+//        planCanal.setId(id);
+//        planCanal.setOtrosAtributos("Muchos atributos más...");
+//        DBUtils.save(planCanal);
+        
+        List<PlanCanal2> planesCanales = DBUtils.findAll(PlanCanal2.class);
+        for (PlanCanal2 planCanalIndex : planesCanales) {
+            System.out.println(planCanalIndex);
+        }
+    }
+    
+    public void ejecutarTestLlaveCompuesta2() {
+        Plan plan = DBUtils.findById(Plan.class, 100);
+        Producto producto = DBUtils.findById(Producto.class, 5001);
+        
+        CuentaProveedorId id = new CuentaProveedorId();
+        id.setCodigoCuenta(1);
+        id.setCodigoProveedor(1);
+        
+        CuentaProveedor cuentaProveedor = new CuentaProveedor();
+        cuentaProveedor.setId(id);
+        cuentaProveedor.setPlan(plan);
+        cuentaProveedor.setProducto(producto);
+        DBUtils.save(cuentaProveedor);
     }
 
     public void ejecutarSesion2() {

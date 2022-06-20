@@ -5,17 +5,54 @@
  */
 package co.edu.uptc.proveedores.vista;
 
+import co.edu.uptc.proveedores.controlador.ControladorPrincipal;
+import co.edu.uptc.proveedores.modelo.Cliente;
+import co.edu.uptc.proveedores.modelo.Cuenta;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author fredy
  */
 public class ClienteVistaPanel extends javax.swing.JPanel {
 
+    private final DefaultTableModel modelClientes;
+    private final DefaultListModel modelReferenciados;
+    private final DefaultListModel modelReferenciadosPor;
+    private Set<Cliente> referenciados;
+
     /**
      * Creates new form ClienteVistaPanel
      */
-    public ClienteVistaPanel() {
+    public ClienteVistaPanel(ControladorPrincipal controladorPrincipal) {
         initComponents();
+        this.initActions(controladorPrincipal);
+        this.modelClientes = new DefaultTableModel();
+        this.modelClientes.setColumnIdentifiers(new String[]{
+            "Número", "Nombres", "Apellidos", "Celular", "Cuenta"});
+        this.tableClientes.setModel(modelClientes);
+        this.modelReferenciados = new DefaultListModel();
+        this.listReferenciados.setModel(modelReferenciados);
+        this.referenciados = new HashSet<>();
+        this.modelReferenciadosPor = new DefaultListModel();
+        this.listReferenciadosPor.setModel(modelReferenciadosPor);
+    }
+
+    private void initActions(ControladorPrincipal controladorPrincipal) {
+        this.btnActualizar.setActionCommand(ControladorPrincipal.ACCION_ACTUALIZAR_CLIENTE);
+        this.btnAgregar.setActionCommand(ControladorPrincipal.ACCION_AGREGAR_CLIENTE);
+        this.btnAgregarReferenciado.setActionCommand(ControladorPrincipal.ACCION_AGREGAR_REFERENCIADO);
+        this.btnConsultar.setActionCommand(ControladorPrincipal.ACCION_CONSULTAR_CLIENTE);
+        this.btnEliminar.setActionCommand(ControladorPrincipal.ACCION_ELIMINAR_CLIENTE);
+        this.btnActualizar.addActionListener(controladorPrincipal);
+        this.btnAgregar.addActionListener(controladorPrincipal);
+        this.btnAgregarReferenciado.addActionListener(controladorPrincipal);
+        this.btnConsultar.addActionListener(controladorPrincipal);
+        this.btnEliminar.addActionListener(controladorPrincipal);
     }
 
     /**
@@ -30,98 +67,89 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lblNombres = new javax.swing.JLabel();
+        inputNombres = new javax.swing.JTextField();
+        lblApellidos = new javax.swing.JLabel();
+        inputApellidos = new javax.swing.JTextField();
+        lblCelular = new javax.swing.JLabel();
+        inputCelular = new javax.swing.JTextField();
+        lblCuenta = new javax.swing.JLabel();
+        inputCuenta = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listReferenciados = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listReferenciadosPor = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableClientes = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnAgregarReferenciado = new javax.swing.JButton();
+        inputNumero = new javax.swing.JSpinner();
+        lblNumero = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CLIENTES");
 
-        jLabel2.setText("Nombres:");
+        lblNombres.setText("Nombres:");
 
-        jTextField1.setText("jTextField1");
+        lblApellidos.setText("Apellidos:");
 
-        jLabel3.setText("Apellidos:");
+        lblCelular.setText("Celular:");
 
-        jTextField2.setText("jTextField2");
-
-        jLabel4.setText("Celular:");
-
-        jTextField3.setText("jTextField3");
-
-        jLabel5.setText("Cuenta:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblCuenta.setText("Cuenta:");
 
         jLabel6.setText("Referenciados:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(listReferenciados);
 
         jLabel7.setText("Referenciados por:");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(listReferenciadosPor);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setText("jButton1");
-        jPanel2.add(jButton1);
+        btnAgregar.setText("Agregar");
+        jPanel2.add(btnAgregar);
 
-        jButton2.setText("jButton2");
-        jPanel2.add(jButton2);
+        btnConsultar.setText("Consultar");
+        jPanel2.add(btnConsultar);
 
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3);
+        btnActualizar.setText("Actualizar");
+        jPanel2.add(btnActualizar);
 
-        jButton4.setText("jButton4");
-        jPanel2.add(jButton4);
+        btnEliminar.setText("Eliminar");
+        jPanel2.add(btnEliminar);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tableClientes);
 
         jButton5.setText("-");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("+");
+        btnAgregarReferenciado.setText("+");
+
+        lblNumero.setText("Número");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,21 +158,9 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -153,9 +169,23 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6)
+                        .addComponent(btnAgregarReferenciado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
+                        .addComponent(jButton5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNombres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                            .addComponent(lblCelular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputNombres)
+                            .addComponent(inputApellidos)
+                            .addComponent(inputCelular)
+                            .addComponent(inputCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputNumero))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,28 +193,32 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputNumero)
+                    .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(inputApellidos)
+                    .addComponent(lblApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(inputCelular)
+                    .addComponent(lblCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(inputCuenta)
+                    .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton6)
+                    .addComponent(btnAgregarReferenciado)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +230,7 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(634, 634, 634))
+                .addGap(589, 589, 589))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -205,7 +239,7 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,33 +249,126 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.eliminarReferenciado();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarReferenciado;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JTextField inputApellidos;
+    private javax.swing.JTextField inputCelular;
+    private javax.swing.JComboBox<Cuenta> inputCuenta;
+    private javax.swing.JTextField inputNombres;
+    private javax.swing.JSpinner inputNumero;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblApellidos;
+    private javax.swing.JLabel lblCelular;
+    private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblNombres;
+    private javax.swing.JLabel lblNumero;
+    private javax.swing.JList<String> listReferenciados;
+    private javax.swing.JList<String> listReferenciadosPor;
+    private javax.swing.JTable tableClientes;
     // End of variables declaration//GEN-END:variables
+
+    public void eliminarReferenciado() {
+        int index = this.listReferenciados.getSelectedIndex();
+        if (index >= 0) {
+            Cliente cliente = (Cliente) this.referenciados.toArray()[index];
+            this.referenciados.remove(cliente);
+            this.modelReferenciados.remove(index);
+        }
+    }
+
+    public void limpiarFormulario() {
+        this.inputApellidos.setText("");
+        this.inputNombres.setText("");
+        this.inputNumero.setValue(0);
+        this.inputCelular.setText("");
+        this.inputCuenta.setSelectedItem(null);
+        this.modelReferenciados.removeAllElements();
+        this.referenciados = new HashSet<>();
+    }
+
+    public Cliente getCliente() {
+        Cliente cliente = new Cliente();
+        cliente.setApellidos(this.inputApellidos.getText());
+        cliente.setNombres(this.inputNombres.getText());
+        cliente.setCelular(this.inputCelular.getText());
+        cliente.setNumero((Integer) this.inputNumero.getValue());
+        cliente.setReferenciados(this.referenciados);
+        Object cuenta = this.inputCuenta.getSelectedItem();
+        if (cuenta != null) {
+            cliente.setCuenta((Cuenta) cuenta);
+        }
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.modelReferenciados.removeAllElements();
+        this.referenciados = new HashSet<>();
+        this.inputNumero.setValue(cliente.getNumero());
+        this.inputCelular.setText(cliente.getCelular());
+        this.inputNombres.setText(cliente.getNombres());
+        this.inputApellidos.setText(cliente.getApellidos());
+        Cuenta cuenta = cliente.getCuenta();
+        if (cuenta != null) {
+            Cuenta cuentaIndex;
+            for (int i = 0; i < this.inputCuenta.getItemCount(); i++) {
+                cuentaIndex = this.inputCuenta.getItemAt(i);
+                if (cuentaIndex != null && cuentaIndex.getCodigo().equals(cuenta.getCodigo())) {
+                    this.inputCuenta.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+        this.referenciados = cliente.getReferenciados();
+        for (Cliente referenciado : referenciados) {
+            this.modelReferenciados.addElement(referenciado.getNombres());
+        }
+        Set<Cliente> referenciadosPor = cliente.getReferenciadoPor();
+        for (Cliente referenciado : referenciadosPor) {
+            this.modelReferenciadosPor.addElement(referenciado.getNombres());
+        }
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.modelClientes.setRowCount(0);
+        Cuenta cuenta;
+        for (Cliente cliente : clientes) {
+            cuenta = cliente.getCuenta();
+            this.modelClientes.addRow(new Object[]{cliente.getNumero(),
+                cliente.getNombres(), cliente.getApellidos(),
+                cliente.getCelular(), cuenta != null ? cuenta.getCodigo() : ""});
+        }
+    }
+
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.inputCuenta.removeAllItems();
+        this.inputCuenta.addItem(null);
+        for (Cuenta cuenta : cuentas) {
+            this.inputCuenta.addItem(cuenta);
+        }
+    }
+
+    public void agregarReferenciado(Cliente cliente) {
+        this.referenciados.add(cliente);
+        this.modelReferenciados.addElement(cliente.getNombres());
+    }
+
 }

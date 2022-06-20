@@ -18,6 +18,9 @@ public class Cliente implements Serializable {
     private Set<Cliente> referenciados = new HashSet<>();
     private Set<Cliente> referenciadoPor = new HashSet<>();
 
+    public Cliente() {
+    }
+
     public Cliente(Integer numero, String nombres, String apellidos, String celular) {
         this.numero = numero;
         this.nombres = nombres;
@@ -93,8 +96,7 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Cliente{" + "numero=" + numero + ", nombres=" + nombres
                 + ", apellidos=" + apellidos + ", celular=" + celular
-                + ", cuenta=" + cuenta + ", referenciados=" + referenciados
-                + '}';
+                + ", cuenta=" + cuenta + '}';
     }
 
 }

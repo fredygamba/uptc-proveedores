@@ -51,7 +51,7 @@ public class Origen implements Serializable {
     @Override
     public String toString() {
         return "Origen{" + "codigo=" + codigo + ", descripcion="
-                + descripcion + ", productos=" + productos + '}';
+                + descripcion + '}';
     }
 
 }

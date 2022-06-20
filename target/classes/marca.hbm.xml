@@ -12,7 +12,7 @@
         <property name="fechaRegistro" type="java.util.Date">
             <column name="FECHA_REGISTRO"/>
         </property>
-        <one-to-one name="proveedor" cascade="all" class="co.edu.uptc.proveedores.modelo.Proveedor">
+        <one-to-one name="proveedor" cascade="save-update" class="co.edu.uptc.proveedores.modelo.Proveedor">
         </one-to-one>
     </class>
 </hibernate-mapping>

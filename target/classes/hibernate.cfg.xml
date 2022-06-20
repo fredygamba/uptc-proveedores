@@ -17,5 +17,6 @@
     <mapping resource="origen.hbm.xml"/>
     <mapping resource="producto.hbm.xml"/>
     <mapping resource="cliente.hbm.xml"/>
+    <mapping resource="cuentaProveedor.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

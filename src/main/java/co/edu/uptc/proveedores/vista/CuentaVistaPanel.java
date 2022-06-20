@@ -5,17 +5,41 @@
  */
 package co.edu.uptc.proveedores.vista;
 
+import co.edu.uptc.proveedores.controlador.ControladorPrincipal;
+import co.edu.uptc.proveedores.modelo.Cliente;
+import co.edu.uptc.proveedores.modelo.Cuenta;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author fredy
  */
 public class CuentaVistaPanel extends javax.swing.JPanel {
 
+    private DefaultTableModel modelCuentas;
+
     /**
      * Creates new form CuentaVistaPanel
      */
-    public CuentaVistaPanel() {
+    public CuentaVistaPanel(ControladorPrincipal controladorPrincipal) {
         initComponents();
+        this.initActions(controladorPrincipal);
+        this.modelCuentas = new DefaultTableModel();
+        this.tableCuentas.setModel(modelCuentas);
+        this.modelCuentas.setColumnIdentifiers(new String[]{
+            "Código", "Cliente", "Dirección", "Teléfono"});
+    }
+
+    private void initActions(ControladorPrincipal controladorPrincipal) {
+        this.btnActualizar.addActionListener(controladorPrincipal);
+        this.btnAgregar.addActionListener(controladorPrincipal);
+        this.btnConsultar.addActionListener(controladorPrincipal);
+        this.btnEliminar.addActionListener(controladorPrincipal);
+        this.btnActualizar.setActionCommand(ControladorPrincipal.ACCION_ACTUALIZAR_CUENTA);
+        this.btnAgregar.setActionCommand(ControladorPrincipal.ACCION_AGREGAR_CUENTA);
+        this.btnConsultar.setActionCommand(ControladorPrincipal.ACCION_CONSULTAR_CUENTA);
+        this.btnEliminar.setActionCommand(ControladorPrincipal.ACCION_ELIMINAR_CUENTA);
     }
 
     /**
@@ -28,66 +52,60 @@ public class CuentaVistaPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lblCodigo = new javax.swing.JLabel();
+        inputCodigo = new javax.swing.JSpinner();
+        lblDireccion = new javax.swing.JLabel();
+        inputDireccion = new javax.swing.JTextField();
+        lblTelefono = new javax.swing.JLabel();
+        inputTelefono = new javax.swing.JTextField();
+        lblCliente = new javax.swing.JLabel();
+        inputCliente = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableCuentas = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CUENTAS");
 
-        jLabel2.setText("jLabel2");
+        lblCodigo.setText("Código:");
 
-        jLabel3.setText("jLabel3");
+        lblDireccion.setText("Dirección:");
 
-        jTextField1.setText("jTextField1");
+        lblTelefono.setText("Teléfono:");
 
-        jLabel4.setText("jLabel4");
+        lblCliente.setText("Cliente:");
 
-        jTextField2.setText("jTextField2");
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel5.setText("jLabel5");
+        btnAgregar.setText("Agregar");
+        jPanel1.add(btnAgregar);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnConsultar.setText("Consultar");
+        jPanel1.add(btnConsultar);
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        btnActualizar.setText("Actualizar");
+        jPanel1.add(btnActualizar);
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1);
+        btnEliminar.setText("Eliminar");
+        jPanel1.add(btnEliminar);
 
-        jButton2.setText("jButton2");
-        jPanel1.add(jButton2);
-
-        jButton3.setText("jButton3");
-        jPanel1.add(jButton3);
-
-        jButton4.setText("jButton4");
-        jPanel1.add(jButton4);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableCuentas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,20 +114,20 @@ public class CuentaVistaPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(lblDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner1)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(inputCodigo)
+                            .addComponent(inputDireccion)
+                            .addComponent(inputTelefono)
+                            .addComponent(inputCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -120,20 +138,20 @@ public class CuentaVistaPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputDireccion)
+                    .addComponent(lblDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputTelefono)
+                    .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputCliente)
+                    .addComponent(lblCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,21 +162,79 @@ public class CuentaVistaPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JComboBox<Cliente> inputCliente;
+    private javax.swing.JSpinner inputCodigo;
+    private javax.swing.JTextField inputDireccion;
+    private javax.swing.JTextField inputTelefono;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblTelefono;
+    private javax.swing.JTable tableCuentas;
     // End of variables declaration//GEN-END:variables
+
+    public Cuenta getCuenta() {
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCodigo((Integer) this.inputCodigo.getValue());
+        cuenta.setDireccion(this.inputDireccion.getText());
+        cuenta.setTelefono(this.inputTelefono.getText());
+        Object cliente = this.inputCliente.getSelectedItem();
+        if (cliente != null) {
+            cuenta.setCliente((Cliente) cliente);
+        }
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.inputCodigo.setValue(cuenta.getCodigo());
+        this.inputDireccion.setText(cuenta.getDireccion());
+        this.inputTelefono.setText(cuenta.getTelefono());
+        Cliente cliente = cuenta.getCliente();
+        if (cliente != null) {
+            Cliente clienteIndex;
+            for (int i = 0; i < this.inputCliente.getItemCount(); i++) {
+                clienteIndex = this.inputCliente.getItemAt(i);
+                if (clienteIndex != null && clienteIndex.getNumero()
+                        .equals(cliente.getNumero())) {
+                    this.inputCliente.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void limpiarFormulario() {
+        this.inputCodigo.setValue(0);
+        this.inputDireccion.setText("");
+        this.inputTelefono.setText("");
+        this.inputCliente.setSelectedItem(null);
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.inputCliente.removeAllItems();
+        this.inputCliente.addItem(null);
+        for (Cliente cliente : clientes) {
+            this.inputCliente.addItem(cliente);
+        }
+    }
+
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.modelCuentas.setRowCount(0);
+        Cliente cliente;
+        String clienteNombre;
+        for (Cuenta cuenta : cuentas) {
+            cliente = cuenta.getCliente();
+            clienteNombre = cliente != null ? cliente.getNombres() : "";
+            this.modelCuentas.addRow(new Object[]{cuenta.getCodigo(),
+                clienteNombre, cuenta.getDireccion(), cuenta.getTelefono()});
+        }
+    }
+
 }

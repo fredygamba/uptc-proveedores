@@ -28,12 +28,12 @@ public class MainFrame extends JFrame {
 
     public MainFrame(ControladorPrincipal controladorPrincipal) {
         this.canalVista = new CanalVistaPanel(controladorPrincipal);
-        this.clienteVista = new ClienteVistaPanel();
-        this.cuentaVista = new CuentaVistaPanel();
+        this.clienteVista = new ClienteVistaPanel(controladorPrincipal);
+        this.cuentaVista = new CuentaVistaPanel(controladorPrincipal);
         this.marcaVista = new MarcaVistaPanel(controladorPrincipal);
-        this.origenVista = new OrigenVistaPanel();
+        this.origenVista = new OrigenVistaPanel(controladorPrincipal);
         this.planVista = new PlanVistaPanel(controladorPrincipal);
-        this.productoVista = new ProductoVistaPanel();
+        this.productoVista = new ProductoVistaPanel(controladorPrincipal);
         this.proveedorVista = new ProveedorVistaPanel(controladorPrincipal);
         initProperties();
         initComponents();
@@ -52,13 +52,13 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Planes", this.planVista);
         tabbedPane.addTab("Clientes", this.clienteVista);
         tabbedPane.addTab("Cuentas", this.cuentaVista);
-        tabbedPane.addTab("Productos", this.productoVista);
         tabbedPane.addTab("Origenes", this.origenVista);
+        tabbedPane.addTab("Productos", this.productoVista);
     }
 
     public void initProperties() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(600, 500);
+        setSize(650, 500);
         setLocationRelativeTo(null);
         setTitle("Proveedores");
     }
@@ -66,17 +66,33 @@ public class MainFrame extends JFrame {
     public CanalVistaPanel getCanalVista() {
         return canalVista;
     }
+
+    public ClienteVistaPanel getClienteVista() {
+        return clienteVista;
+    }
+    
+    public CuentaVistaPanel getCuentaVista() {
+        return cuentaVista;
+    }
     
     public MarcaVistaPanel getMarcaVista() {
         return this.marcaVista;
     }
 
+    public ProductoVistaPanel getProductoVista() {
+        return productoVista;
+    }
+
+    public OrigenVistaPanel getOrigenVista() {
+        return origenVista;
+    }
+
     public PlanVistaPanel getPlanVista() {
         return planVista;
     }
-    
+
     public ProveedorVistaPanel getProveedorVista() {
         return proveedorVista;
     }
-    
+
 }
