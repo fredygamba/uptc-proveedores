@@ -8,6 +8,7 @@ package co.edu.uptc.proveedores.controlador;
 import co.edu.uptc.proveedores.dao.CanalDAO;
 import co.edu.uptc.proveedores.dao.ClienteDAO;
 import co.edu.uptc.proveedores.dao.CuentaDAO;
+import co.edu.uptc.proveedores.dao.CuentaProveedorDAO;
 import co.edu.uptc.proveedores.dao.MarcaDAO;
 import co.edu.uptc.proveedores.dao.OrigenDAO;
 import co.edu.uptc.proveedores.dao.PlanDAO;
@@ -16,6 +17,8 @@ import co.edu.uptc.proveedores.dao.ProveedorDAO;
 import co.edu.uptc.proveedores.modelo.Canal;
 import co.edu.uptc.proveedores.modelo.Cliente;
 import co.edu.uptc.proveedores.modelo.Cuenta;
+import co.edu.uptc.proveedores.modelo.CuentaProveedor;
+import co.edu.uptc.proveedores.modelo.CuentaProveedorId;
 import co.edu.uptc.proveedores.modelo.Marca;
 import co.edu.uptc.proveedores.modelo.Origen;
 import co.edu.uptc.proveedores.modelo.Plan;
@@ -23,6 +26,7 @@ import co.edu.uptc.proveedores.modelo.Producto;
 import co.edu.uptc.proveedores.modelo.Proveedor;
 import co.edu.uptc.proveedores.vista.CanalVistaPanel;
 import co.edu.uptc.proveedores.vista.ClienteVistaPanel;
+import co.edu.uptc.proveedores.vista.CuentaProveedorVista;
 import co.edu.uptc.proveedores.vista.CuentaVistaPanel;
 import co.edu.uptc.proveedores.vista.MainFrame;
 import co.edu.uptc.proveedores.vista.MarcaVistaPanel;
@@ -47,10 +51,11 @@ import javax.swing.JOptionPane;
  */
 public class ControladorPrincipal implements ActionListener {
 
-    public static final String ACCION_ACTUALIZAR_MARCA = "actualizarMarca";
     public static final String ACCION_ACTUALIZAR_CANAL = "actualizarCanal";
     public static final String ACCION_ACTUALIZAR_CLIENTE = "actualizarCliente";
     public static final String ACCION_ACTUALIZAR_CUENTA = "actualizarCuenta";
+    public static final String ACCION_ACTUALIZAR_CUENTA_PROVEEDOR = "actualizarCuentaProveedor";
+    public static final String ACCION_ACTUALIZAR_MARCA = "actualizarMarca";
     public static final String ACCION_ACTUALIZAR_PLAN = "actualizarPlan";
     public static final String ACCION_ACTUALIZAR_PRODUCTO = "actualizarProducto";
     public static final String ACCION_ACTUALIZAR_PROVEEDOR = "actualizarProveedor";
@@ -58,6 +63,7 @@ public class ControladorPrincipal implements ActionListener {
     public static final String ACCION_AGREGAR_CANAL_PLAN = "agregarCanalPlan";
     public static final String ACCION_AGREGAR_CLIENTE = "agregarCliente";
     public static final String ACCION_AGREGAR_CUENTA = "agregarCuenta";
+    public static final String ACCION_AGREGAR_CUENTA_PROVEEDOR = "agregarCuentaProveedor";
     public static final String ACCION_AGREGAR_MARCA = "agregarMarca";
     public static final String ACCION_AGREGAR_ORIGEN = "agregarOrigen";
     public static final String ACCION_AGREGAR_PLAN = "agregarPlan";
@@ -68,6 +74,7 @@ public class ControladorPrincipal implements ActionListener {
     public static final String ACCION_CONSULTAR_CANAL = "consultarCanal";
     public static final String ACCION_CONSULTAR_CLIENTE = "consultarCliente";
     public static final String ACCION_CONSULTAR_CUENTA = "consultarCuenta";
+    public static final String ACCION_CONSULTAR_CUENTA_PROVEEDOR = "consultarCuentaProveedor";
     public static final String ACCION_CONSULTAR_MARCA = "consultarMarca";
     public static final String ACCION_CONSULTAR_PLAN = "consultarPlan";
     public static final String ACCION_CONSULTAR_PRODUCTO = "consultarProducto";
@@ -75,6 +82,7 @@ public class ControladorPrincipal implements ActionListener {
     public static final String ACCION_ELIMINAR_CANAL = "eliminarCanal";
     public static final String ACCION_ELIMINAR_CLIENTE = "eliminarCliente";
     public static final String ACCION_ELIMINAR_CUENTA = "eliminarCuenta";
+    public static final String ACCION_ELIMINAR_CUENTA_PROVEEDOR = "eliminarCuentaProveedor";
     public static final String ACCION_ELIMINAR_MARCA = "eliminarMarca";
     public static final String ACCION_ELIMINAR_PLAN = "eliminarPlan";
     public static final String ACCION_ELIMINAR_PRODUCTO = "eliminarProducto";
@@ -84,6 +92,7 @@ public class ControladorPrincipal implements ActionListener {
     private final CanalDAO canalDAO;
     private final ClienteDAO clienteDAO;
     private final CuentaDAO cuentaDAO;
+    private final CuentaProveedorDAO cuentaProveedorDAO;
     private final MarcaDAO marcaDAO;
     private final OrigenDAO origenDAO;
     private final PlanDAO planDAO;
@@ -95,6 +104,7 @@ public class ControladorPrincipal implements ActionListener {
         this.canalDAO = new CanalDAO();
         this.clienteDAO = new ClienteDAO();
         this.cuentaDAO = new CuentaDAO();
+        this.cuentaProveedorDAO = new CuentaProveedorDAO();
         this.marcaDAO = new MarcaDAO();
         this.origenDAO = new OrigenDAO();
         this.planDAO = new PlanDAO();
@@ -114,6 +124,9 @@ public class ControladorPrincipal implements ActionListener {
                 break;
             case ACCION_ACTUALIZAR_CUENTA:
                 this.actualizarCuenta();
+                break;
+            case ACCION_ACTUALIZAR_CUENTA_PROVEEDOR:
+                this.actualizarCuentaProveedor();
                 break;
             case ACCION_ACTUALIZAR_MARCA:
                 this.actualizarMarca();
@@ -138,6 +151,9 @@ public class ControladorPrincipal implements ActionListener {
                 break;
             case ACCION_AGREGAR_CUENTA:
                 this.agregarCuenta();
+                break;
+            case ACCION_AGREGAR_CUENTA_PROVEEDOR:
+                this.agregarCuentaProveedor();
                 break;
             case ACCION_AGREGAR_MARCA:
                 this.agregarMarca();
@@ -169,6 +185,9 @@ public class ControladorPrincipal implements ActionListener {
             case ACCION_CONSULTAR_CUENTA:
                 this.consultarCuenta();
                 break;
+            case ACCION_CONSULTAR_CUENTA_PROVEEDOR:
+                this.consultarCuentaProveedor();
+                break;
             case ACCION_CONSULTAR_MARCA:
                 this.consultarMarca();
                 break;
@@ -189,6 +208,9 @@ public class ControladorPrincipal implements ActionListener {
                 break;
             case ACCION_ELIMINAR_CUENTA:
                 this.eliminarCuenta();
+                break;
+            case ACCION_ELIMINAR_CUENTA_PROVEEDOR:
+                this.eliminarCuentaProveedor();
                 break;
             case ACCION_ELIMINAR_MARCA:
                 this.eliminarMarca();
@@ -229,15 +251,9 @@ public class ControladorPrincipal implements ActionListener {
     private void actualizarCliente() {
         ClienteVistaPanel clienteVista = this.mainFrame.getClienteVista();
         Cliente cliente = clienteVista.getCliente();
-        Cliente clienteAux;
-        if ((clienteAux = this.clienteDAO.consultar(cliente.getNumero())) == null) {
+        if (this.clienteDAO.consultar(cliente.getNumero()) == null) {
             JOptionPane.showMessageDialog(null, "No se encontró el cliente ingresado.");
         } else {
-//            clienteAux.setApellidos(cliente.getNombres());
-//            clienteAux.setCelular(cliente.getCelular());
-//            clienteAux.setCuenta(cliente.getCuenta());
-//            clienteAux.setNombres(cliente.getNombres());
-//            clienteAux.setNumero(cliente.getNumero());
             this.clienteDAO.actualizar(cliente);
             clienteVista.limpiarFormulario();
             List<Cliente> clientes = this.clienteDAO.consultar();
@@ -255,6 +271,21 @@ public class ControladorPrincipal implements ActionListener {
             this.cuentaDAO.actualizar(cuenta);
             cuetaVista.limpiarFormulario();
             cuetaVista.setCuentas(this.cuentaDAO.consultar());
+        }
+    }
+
+    private void actualizarCuentaProveedor() {
+        CuentaProveedorVista cuentaProveedorVista = this.mainFrame.getCuentaProveedorVista();
+        CuentaProveedor cuentaProveedor = cuentaProveedorVista.getCuentaProveedor();
+        CuentaProveedorId id = cuentaProveedor.getId();
+        if (id.getCodigoCuenta() == null || id.getCodigoProveedor() == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta y un proveedor.");
+        } else if (this.cuentaProveedorDAO.consultar(id) == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró la cuenta proveedor ingresada.");
+        } else {
+            this.cuentaProveedorDAO.actualizar(cuentaProveedor);
+            cuentaProveedorVista.limpiarFormulario();
+            cuentaProveedorVista.setCuentasProveedores(this.cuentaProveedorDAO.consultar());
         }
     }
 
@@ -371,11 +402,26 @@ public class ControladorPrincipal implements ActionListener {
         CuentaVistaPanel cuentaVista = this.mainFrame.getCuentaVista();
         Cuenta cuenta = cuentaVista.getCuenta();
         if (cuentaDAO.consultar(cuenta.getCodigo()) != null) {
-            JOptionPane.showMessageDialog(null, "Ya se ha registrado el cuenta.");
+            JOptionPane.showMessageDialog(null, "Ya se ha registrada la cuenta.");
         } else {
             cuentaDAO.agregar(cuenta);
             cuentaVista.setCuentas(this.cuentaDAO.consultar());
             cuentaVista.limpiarFormulario();
+        }
+    }
+
+    private void agregarCuentaProveedor() {
+        CuentaProveedorVista cuentaProveedorVista = this.mainFrame.getCuentaProveedorVista();
+        CuentaProveedor cuentaProveedor = cuentaProveedorVista.getCuentaProveedor();
+        CuentaProveedorId id = cuentaProveedor.getId();
+        if (id.getCodigoCuenta() == null || id.getCodigoProveedor() == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta y un proveedor.");
+        } else if (cuentaProveedorDAO.consultar(id) != null) {
+            JOptionPane.showMessageDialog(null, "Ya se ha registrado la cuenta proveedor.");
+        } else {
+            cuentaProveedorDAO.agregar(cuentaProveedor);
+            cuentaProveedorVista.setCuentasProveedores(this.cuentaProveedorDAO.consultar());
+            cuentaProveedorVista.limpiarFormulario();
         }
     }
 
@@ -526,6 +572,13 @@ public class ControladorPrincipal implements ActionListener {
         ProductoVistaPanel productoVista = this.mainFrame.getProductoVista();
         productoVista.setOrigenes(origenes);
 
+        CuentaProveedorVista cuentaProveedorVista = this.mainFrame.getCuentaProveedorVista();
+        cuentaProveedorVista.setPlanes(planes);
+        cuentaProveedorVista.setProductos(productos);
+        cuentaProveedorVista.setProveedores(proveedores);
+        cuentaProveedorVista.setCuentas(cuentas);
+        cuentaProveedorVista.setCuentasProveedores(this.cuentaProveedorDAO.consultar());
+
         this.mainFrame.getCanalVista().setCanales(canales);
         this.mainFrame.getPlanVista().setPlanes(planes);
         this.mainFrame.getOrigenVista().setOrigenes(origenes);
@@ -561,6 +614,19 @@ public class ControladorPrincipal implements ActionListener {
             JOptionPane.showMessageDialog(null, "No se encontró la cuenta");
         } else {
             cuentaVista.setCuenta(cuenta);
+        }
+    }
+
+    private void consultarCuentaProveedor() {
+        CuentaProveedorVista cuentaProveedorVista = this.mainFrame.getCuentaProveedorVista();
+        CuentaProveedor cuentaProveedor = cuentaProveedorVista.getCuentaProveedor();
+        CuentaProveedorId id = cuentaProveedor.getId();
+        if (id.getCodigoCuenta() == null || id.getCodigoProveedor() == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta y un proveedor.");
+        } else if ((cuentaProveedor = this.cuentaProveedorDAO.consultar(id)) == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró la cuenta proveedor.");
+        } else {
+            cuentaProveedorVista.setCuentaProveedor(cuentaProveedor);
         }
     }
 
@@ -651,6 +717,21 @@ public class ControladorPrincipal implements ActionListener {
             cuentaVista.setCuentas(this.cuentaDAO.consultar());
         }
     }
+    
+    private void eliminarCuentaProveedor() {
+        CuentaProveedorVista cuentaProveedorVista = this.mainFrame.getCuentaProveedorVista();
+        CuentaProveedor cuentaProveedor = cuentaProveedorVista.getCuentaProveedor();
+        CuentaProveedorId id = cuentaProveedor.getId();
+        if (id.getCodigoCuenta() == null || id.getCodigoProveedor() == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta y un proveedor.");
+        } else if ((cuentaProveedor = this.cuentaProveedorDAO.consultar(id)) == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró la cuenta ingresada.");
+        } else if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar la cuenta?") == 0) {
+            this.cuentaProveedorDAO.eliminar(cuentaProveedor);
+            cuentaProveedorVista.limpiarFormulario();
+            cuentaProveedorVista.setCuentasProveedores(this.cuentaProveedorDAO.consultar());
+        }
+    }
 
     private void eliminarMarca() {
         MarcaVistaPanel marcaVista = this.mainFrame.getMarcaVista();
@@ -672,7 +753,7 @@ public class ControladorPrincipal implements ActionListener {
         Plan plan = this.planDAO.consultar(planVista.getPlan().getCodigo());
         if (plan == null) {
             JOptionPane.showMessageDialog(null, "No se encontró el plan.");
-        } else if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el plan?") == 0){
+        } else if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el plan?") == 0) {
             this.planDAO.eliminar(plan);
             planVista.limpiarFormulario();
             planVista.setPlanes(this.planDAO.consultar());

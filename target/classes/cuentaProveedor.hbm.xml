@@ -10,10 +10,10 @@
                 <column name="codigo_cuenta"/>
             </key-property>
         </composite-id>
-        <many-to-one name="plan" cascade="all" class="co.edu.uptc.proveedores.modelo.Plan">
+        <many-to-one name="plan" cascade="merge" class="co.edu.uptc.proveedores.modelo.Plan" lazy="false">
             <column name="codigo_plan"/>
         </many-to-one>
-        <many-to-one name="producto" cascade="all" class="co.edu.uptc.proveedores.modelo.Producto">
+        <many-to-one name="producto" cascade="merge" class="co.edu.uptc.proveedores.modelo.Producto" lazy="false">
             <column name="codigo_producto"/>
         </many-to-one>
     </class>

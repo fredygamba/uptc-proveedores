@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
 
     private final CanalVistaPanel canalVista;
     private final ClienteVistaPanel clienteVista;
+    private final CuentaProveedorVista cuentaProveedorVista;
     private final CuentaVistaPanel cuentaVista;
     private final MarcaVistaPanel marcaVista;
     private final OrigenVistaPanel origenVista;
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame {
     public MainFrame(ControladorPrincipal controladorPrincipal) {
         this.canalVista = new CanalVistaPanel(controladorPrincipal);
         this.clienteVista = new ClienteVistaPanel(controladorPrincipal);
+        this.cuentaProveedorVista = new CuentaProveedorVista(controladorPrincipal);
         this.cuentaVista = new CuentaVistaPanel(controladorPrincipal);
         this.marcaVista = new MarcaVistaPanel(controladorPrincipal);
         this.origenVista = new OrigenVistaPanel(controladorPrincipal);
@@ -54,6 +56,7 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Cuentas", this.cuentaVista);
         tabbedPane.addTab("Origenes", this.origenVista);
         tabbedPane.addTab("Productos", this.productoVista);
+        tabbedPane.addTab("Cuenta proveedor", this.cuentaProveedorVista);
     }
 
     public void initProperties() {
@@ -69,6 +72,10 @@ public class MainFrame extends JFrame {
 
     public ClienteVistaPanel getClienteVista() {
         return clienteVista;
+    }
+
+    public CuentaProveedorVista getCuentaProveedorVista() {
+        return cuentaProveedorVista;
     }
     
     public CuentaVistaPanel getCuentaVista() {

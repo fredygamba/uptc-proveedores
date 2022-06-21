@@ -5,6 +5,7 @@
  */
 package co.edu.uptc.proveedores.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.HibernateException;
 
@@ -17,9 +18,9 @@ public interface IGenericaDAO<T> {
 
     public void actualizar(T objeto) throws HibernateException;
 
-    public Integer agregar(T objeto) throws HibernateException;
+    public Serializable agregar(T objeto) throws HibernateException;
 
-    public T consultar(Integer codigo) throws HibernateException;
+    public T consultar(Serializable codigo) throws HibernateException;
 
     public List<T> consultar() throws HibernateException;
 

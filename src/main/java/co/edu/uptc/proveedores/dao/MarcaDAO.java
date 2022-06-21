@@ -8,6 +8,7 @@ package co.edu.uptc.proveedores.dao;
 import co.edu.uptc.proveedores.modelo.Marca;
 import co.edu.uptc.proveedores.modelo.Proveedor;
 import co.edu.uptc.utils.DBUtils;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.HibernateException;
 
@@ -28,7 +29,7 @@ public class MarcaDAO implements IGenericaDAO<Marca> {
     }
 
     @Override
-    public Marca consultar(Integer codigo) throws HibernateException {
+    public Marca consultar(Serializable codigo) throws HibernateException {
         return DBUtils.findById(Marca.class, codigo);
     }
 

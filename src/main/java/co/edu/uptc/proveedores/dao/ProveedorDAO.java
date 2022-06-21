@@ -7,6 +7,7 @@ package co.edu.uptc.proveedores.dao;
 
 import co.edu.uptc.proveedores.modelo.Proveedor;
 import co.edu.uptc.utils.DBUtils;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.HibernateException;
 
@@ -27,7 +28,7 @@ public class ProveedorDAO implements IGenericaDAO<Proveedor> {
     }
 
     @Override
-    public Proveedor consultar(Integer codigo) throws HibernateException {
+    public Proveedor consultar(Serializable codigo) throws HibernateException {
         return DBUtils.findById(Proveedor.class, codigo);
     }
 

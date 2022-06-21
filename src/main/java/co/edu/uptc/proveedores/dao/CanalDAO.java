@@ -7,6 +7,7 @@ package co.edu.uptc.proveedores.dao;
 
 import co.edu.uptc.proveedores.modelo.Canal;
 import co.edu.uptc.utils.DBUtils;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.HibernateException;
 
@@ -27,7 +28,7 @@ public class CanalDAO implements IGenericaDAO<Canal> {
     }
     
     @Override
-    public Canal consultar(Integer codigo) throws HibernateException {
+    public Canal consultar(Serializable codigo) throws HibernateException {
         return DBUtils.findById(Canal.class, codigo);
     }
     

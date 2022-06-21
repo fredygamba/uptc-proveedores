@@ -11,7 +11,6 @@ import co.edu.uptc.proveedores.modelo.Marca;
 import co.edu.uptc.proveedores.modelo.Origen;
 import co.edu.uptc.proveedores.modelo.Plan;
 import co.edu.uptc.proveedores.modelo.PlanCanal2;
-import co.edu.uptc.proveedores.modelo.PlanCanal2Id;
 import co.edu.uptc.proveedores.modelo.Producto;
 import co.edu.uptc.proveedores.modelo.Proveedor;
 import co.edu.uptc.utils.DBUtils;
