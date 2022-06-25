@@ -270,7 +270,9 @@ public class ControladorPrincipal implements ActionListener {
         } else {
             this.cuentaDAO.actualizar(cuenta);
             cuetaVista.limpiarFormulario();
-            cuetaVista.setCuentas(this.cuentaDAO.consultar());
+            List<Cuenta> cuentas = this.cuentaDAO.consultar();
+            cuetaVista.setCuentas(cuentas);
+            this.mainFrame.getClienteVista().setCuentas(cuentas);
         }
     }
 
@@ -318,6 +320,9 @@ public class ControladorPrincipal implements ActionListener {
             JOptionPane.showMessageDialog(null, "No se encontró el plan ingresado.");
         } else {
             this.planDAO.actualizar(plan);
+            planVista.limpiarFormulario();
+            List<Plan> planes = this.planDAO.consultar();
+            planVista.setPlanes(planes);
         }
     }
 
@@ -376,7 +381,7 @@ public class ControladorPrincipal implements ActionListener {
                 planesRestantes.add(plan);
             }
         }
-        Object object = JOptionPane.showInputDialog(null, "Mensaje", "Título",
+        Object object = JOptionPane.showInputDialog(null, "Seleccione un plan", "Agregar plan",
                 0, null, planesRestantes.toArray(), null);
         if (object != null) {
             Plan plan = (Plan) object;
@@ -405,7 +410,9 @@ public class ControladorPrincipal implements ActionListener {
             JOptionPane.showMessageDialog(null, "Ya se ha registrada la cuenta.");
         } else {
             cuentaDAO.agregar(cuenta);
-            cuentaVista.setCuentas(this.cuentaDAO.consultar());
+            List<Cuenta> cuentas = this.cuentaDAO.consultar();
+            cuentaVista.setCuentas(cuentas);
+            this.mainFrame.getClienteVista().setCuentas(cuentas);
             cuentaVista.limpiarFormulario();
         }
     }
@@ -484,8 +491,8 @@ public class ControladorPrincipal implements ActionListener {
                 canalesRestantes.add(canal);
             }
         }
-        Object object = JOptionPane.showInputDialog(null, "Mensaje", "Título",
-                0, null, canalesRestantes.toArray(), null);
+        Object object = JOptionPane.showInputDialog(null, "Seleccione un canal...",
+                "Agregar canal", 0, null, canalesRestantes.toArray(), null);
         if (object != null) {
             planVista.agregarCanal((Canal) object);
         }
@@ -717,7 +724,7 @@ public class ControladorPrincipal implements ActionListener {
             cuentaVista.setCuentas(this.cuentaDAO.consultar());
         }
     }
-    
+
     private void eliminarCuentaProveedor() {
         CuentaProveedorVista cuentaProveedorVista = this.mainFrame.getCuentaProveedorVista();
         CuentaProveedor cuentaProveedor = cuentaProveedorVista.getCuentaProveedor();

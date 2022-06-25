@@ -42,10 +42,10 @@ public class ProveedorVistaPanel extends javax.swing.JPanel {
     private void initTabla() {
         this.defaultTableModel = new DefaultTableModel();
         this.defaultTableModel.addColumn("Código");
-        this.defaultTableModel.addColumn("Descripción");
         this.defaultTableModel.addColumn("Contacto");
         this.defaultTableModel.addColumn("Teléfono");
         this.defaultTableModel.addColumn("Página web");
+        this.defaultTableModel.addColumn("Descripción");
         this.defaultTableModel.addColumn("Marca");
         this.tablaProveedores.setModel(defaultTableModel);
     }

@@ -61,6 +61,7 @@ public class PlanVistaPanel extends javax.swing.JPanel {
 
     public void limpiarFormulario() {
         this.plan = null;
+        this.inputCodigo.setValue(0);
         this.inputCosto.setValue(0);
         this.inputNombre.setText("");
         this.defaultListModel.removeAllElements();
