@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
 
     public void initProperties() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(650, 500);
+        setSize(710, 500);
         setLocationRelativeTo(null);
         setTitle("Proveedores");
     }

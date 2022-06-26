@@ -56,6 +56,7 @@ public class ControladorPrincipal implements ActionListener {
     public static final String ACCION_ACTUALIZAR_CUENTA = "actualizarCuenta";
     public static final String ACCION_ACTUALIZAR_CUENTA_PROVEEDOR = "actualizarCuentaProveedor";
     public static final String ACCION_ACTUALIZAR_MARCA = "actualizarMarca";
+    public static final String ACCION_ACTUALIZAR_ORIGEN = "actualizarOrigen";
     public static final String ACCION_ACTUALIZAR_PLAN = "actualizarPlan";
     public static final String ACCION_ACTUALIZAR_PRODUCTO = "actualizarProducto";
     public static final String ACCION_ACTUALIZAR_PROVEEDOR = "actualizarProveedor";
@@ -76,6 +77,7 @@ public class ControladorPrincipal implements ActionListener {
     public static final String ACCION_CONSULTAR_CUENTA = "consultarCuenta";
     public static final String ACCION_CONSULTAR_CUENTA_PROVEEDOR = "consultarCuentaProveedor";
     public static final String ACCION_CONSULTAR_MARCA = "consultarMarca";
+    public static final String ACCION_CONSULTAR_ORIGEN = "consultarOrigen";
     public static final String ACCION_CONSULTAR_PLAN = "consultarPlan";
     public static final String ACCION_CONSULTAR_PRODUCTO = "consultarProducto";
     public static final String ACCION_CONSULTAR_PROVEEDOR = "consultarProveedor";
@@ -84,6 +86,7 @@ public class ControladorPrincipal implements ActionListener {
     public static final String ACCION_ELIMINAR_CUENTA = "eliminarCuenta";
     public static final String ACCION_ELIMINAR_CUENTA_PROVEEDOR = "eliminarCuentaProveedor";
     public static final String ACCION_ELIMINAR_MARCA = "eliminarMarca";
+    public static final String ACCION_ELIMINAR_ORIGEN = "eliminarOrigen";
     public static final String ACCION_ELIMINAR_PLAN = "eliminarPlan";
     public static final String ACCION_ELIMINAR_PRODUCTO = "eliminarProducto";
     public static final String ACCION_ELIMINAR_PROVEEDOR = "eliminarProveedor";
@@ -130,6 +133,9 @@ public class ControladorPrincipal implements ActionListener {
                 break;
             case ACCION_ACTUALIZAR_MARCA:
                 this.actualizarMarca();
+                break;
+            case ACCION_ACTUALIZAR_ORIGEN:
+                this.actualizarOrigen();
                 break;
             case ACCION_ACTUALIZAR_PLAN:
                 this.actualizarPlan();
@@ -191,6 +197,9 @@ public class ControladorPrincipal implements ActionListener {
             case ACCION_CONSULTAR_MARCA:
                 this.consultarMarca();
                 break;
+            case ACCION_CONSULTAR_ORIGEN:
+                this.consultarOrigen();
+                break;
             case ACCION_CONSULTAR_PLAN:
                 this.consultarPlan();
                 break;
@@ -214,6 +223,9 @@ public class ControladorPrincipal implements ActionListener {
                 break;
             case ACCION_ELIMINAR_MARCA:
                 this.eliminarMarca();
+                break;
+            case ACCION_ELIMINAR_ORIGEN:
+                this.eliminarOrigen();
                 break;
             case ACCION_ELIMINAR_PLAN:
                 this.eliminarPlan();
@@ -312,10 +324,23 @@ public class ControladorPrincipal implements ActionListener {
         }
     }
 
+    private void actualizarOrigen() {
+        OrigenVistaPanel origenVista = this.mainFrame.getOrigenVista();
+        Origen origen = origenVista.getOrigen();
+        if (this.origenDAO.consultar(origen.getCodigo()) == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el origen ingresado.");
+        } else {
+            this.origenDAO.actualizar(origen);
+            origenVista.limpiarFormulario();
+            List<Origen> origenes = this.origenDAO.consultar();
+            origenVista.setOrigenes(origenes);
+            this.mainFrame.getProductoVista().setOrigenes(origenes);
+        }
+    }
+
     private void actualizarPlan() {
         PlanVistaPanel planVista = this.mainFrame.getPlanVista();
         Plan plan = planVista.getPlan();
-        System.out.println(plan.getCanales());
         if (this.planDAO.consultar(plan.getCodigo()) == null) {
             JOptionPane.showMessageDialog(null, "No se encontró el plan ingresado.");
         } else {
@@ -456,15 +481,16 @@ public class ControladorPrincipal implements ActionListener {
             JOptionPane.showMessageDialog(null, "Ya se ha registrado el canal.");
         } else {
             this.origenDAO.agregar(origen);
-            origenVista.setOrigenes(this.origenDAO.consultar());
+            origenVista.limpiarFormulario();
+            List<Origen> origenes = this.origenDAO.consultar();
+            origenVista.setOrigenes(origenes);
+            this.mainFrame.getProductoVista().setOrigenes(origenes);
         }
     }
 
     private void agregarPlan() {
         PlanVistaPanel planVista = this.mainFrame.getPlanVista();
         Plan plan = planVista.getPlan();
-        System.out.println(plan);
-        System.out.println(plan.getCanales());
         if (this.planDAO.consultar(plan.getCodigo()) != null) {
             JOptionPane.showMessageDialog(null, "Ya se ha registrado el plan.");
         } else {
@@ -505,6 +531,7 @@ public class ControladorPrincipal implements ActionListener {
             JOptionPane.showMessageDialog(null, "Ya se ha registrado el producto.");
         } else {
             this.productoDAO.agregar(producto);
+            productoVista.limpiarFormulario();
             productoVista.setProductos(this.productoDAO.consultar());
         }
     }
@@ -652,6 +679,17 @@ public class ControladorPrincipal implements ActionListener {
             }
         }
     }
+    
+    private void consultarOrigen() {
+        OrigenVistaPanel origenVista = this.mainFrame.getOrigenVista();
+        Origen origen = origenVista.getOrigen();
+        origen = this.origenDAO.consultar(origen.getCodigo());
+        if (origen == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el cliente.");
+        } else {
+            origenVista.setOrigen(origen);
+        }
+    }
 
     private void consultarPlan() {
         PlanVistaPanel planVista = this.mainFrame.getPlanVista();
@@ -721,7 +759,9 @@ public class ControladorPrincipal implements ActionListener {
         } else if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar la cuenta?") == 0) {
             this.cuentaDAO.eliminar(cuenta);
             cuentaVista.limpiarFormulario();
-            cuentaVista.setCuentas(this.cuentaDAO.consultar());
+            List<Cuenta> cuentas = this.cuentaDAO.consultar();
+            cuentaVista.setCuentas(cuentas);
+            this.mainFrame.getClienteVista().setCuentas(cuentas);
         }
     }
 
@@ -752,6 +792,20 @@ public class ControladorPrincipal implements ActionListener {
             List<Marca> marcas = this.marcaDAO.consultar();
             marcaVista.setMarcas(marcas);
             this.mainFrame.getProveedorVista().setMarcas(marcas);
+        }
+    }
+    
+    private void eliminarOrigen() {
+        OrigenVistaPanel origenVista = this.mainFrame.getOrigenVista();
+        Origen origen = this.origenDAO.consultar(origenVista.getOrigen().getCodigo());
+        if (origen == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el origen.");
+        } else if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el origen?") == 0) {
+            this.origenDAO.eliminar(origen);
+            origenVista.limpiarFormulario();
+            List<Origen> origenes = this.origenDAO.consultar();
+            origenVista.setOrigenes(origenes);
+            this.mainFrame.getProductoVista().setOrigenes(origenes);
         }
     }
 

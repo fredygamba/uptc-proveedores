@@ -321,6 +321,7 @@ public class ClienteVistaPanel extends javax.swing.JPanel {
 
     public void setCliente(Cliente cliente) {
         this.modelReferenciados.removeAllElements();
+        this.modelReferenciadosPor.removeAllElements();
         this.referenciados = new HashSet<>();
         this.inputNumero.setValue(cliente.getNumero());
         this.inputCelular.setText(cliente.getCelular());

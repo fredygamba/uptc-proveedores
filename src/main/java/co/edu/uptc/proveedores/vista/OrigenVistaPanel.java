@@ -37,6 +37,12 @@ public class OrigenVistaPanel extends javax.swing.JPanel {
     private void initActions(ControladorPrincipal controladorPrincipal) {
         this.btnAgregar.addActionListener(controladorPrincipal);
         this.btnAgregar.setActionCommand(ControladorPrincipal.ACCION_AGREGAR_ORIGEN);
+        this.btnActualizar.addActionListener(controladorPrincipal);
+        this.btnActualizar.setActionCommand(ControladorPrincipal.ACCION_ACTUALIZAR_ORIGEN);
+        this.btnConsultar.addActionListener(controladorPrincipal);
+        this.btnConsultar.setActionCommand(ControladorPrincipal.ACCION_CONSULTAR_ORIGEN);
+        this.btnEliminar.addActionListener(controladorPrincipal);
+        this.btnEliminar.setActionCommand(ControladorPrincipal.ACCION_ELIMINAR_ORIGEN);
     }
 
     /**
@@ -153,6 +159,11 @@ public class OrigenVistaPanel extends javax.swing.JPanel {
     private javax.swing.JTable tableOrigenes;
     // End of variables declaration//GEN-END:variables
 
+    public void limpiarFormulario() {
+        this.inputCodigo.setValue(0);
+        this.inputDescripcion.setText("");
+    }
+    
     public Origen getOrigen() {
         Origen origen = new Origen();
         origen.setCodigo((Integer) this.inputCodigo.getValue());
@@ -166,6 +177,11 @@ public class OrigenVistaPanel extends javax.swing.JPanel {
             this.tableModelOrigenes.addRow(new Object[]{origen.getCodigo(),
                 origen.getDescripcion()});
         }
+    }
+
+    public void setOrigen(Origen origen) {
+        this.inputCodigo.setValue(origen.getCodigo());
+        this.inputDescripcion.setText(origen.getDescripcion());
     }
 
 }
